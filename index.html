@@ -1,89 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airline Fuel Hedge Tracker | Holiday Extras</title>
-  <meta name="description" content="Find out when your airline's fuel protection runs out — and whether now is a good time to book your summer flights.">
-  <meta property="og:title" content="Airline Fuel Hedge Tracker | Holiday Extras">
-  <meta property="og:description" content="UK airlines are shielded from today's high fuel prices — for now. Our tracker shows when that protection runs out.">
-  <meta property="og:type" content="article">
-
+  <title>Treibstoffabsicherungs-Tracker 2026: Wann steigen Flugpreise? | holidayextras.de</title>
+  <meta name="description" content="Verfolgen Sie die Kerosin-Absicherung der großen deutschen Urlaubsairlines und erfahren Sie, wann Flugpreise steigen könnten. Mit interaktivem Tool – kostenlos von holidayextras.de.">
   <style>
-    /* ══════════════════════════════════════════════════════════
-       HX DESIGN SYSTEM — CSS Custom Properties
-       ══════════════════════════════════════════════════════════ */
+    /* =========================================
+       HX Design System — Deutschland
+       Primärfarbe: #542e91 (lila)
+    ========================================= */
     :root {
-      --hx-primary:       #FF6600;
-      --hx-primary-dark:  #E55A00;
-      --hx-primary-light: rgba(255, 102, 0, 0.12);
-      --hx-dark:          #1A2B5E;
-      --hx-dark-alt:      #2D4A8A;
-      --hx-light-bg:      #F5F7FA;
-      --hx-card:          #FFFFFF;
-      --hx-text:          #2D2D2D;
-      --hx-text-muted:    #6B7280;
-      --hx-border:        #E5E7EB;
-      --hx-green:         #22C55E;
-      --hx-green-bg:      #F0FDF4;
-      --hx-green-border:  #86EFAC;
-      --hx-amber:         #F59E0B;
-      --hx-amber-bg:      #FFFBEB;
-      --hx-amber-border:  #FCD34D;
-      --hx-red:           #EF4444;
-      --hx-red-bg:        #FEF2F2;
-      --hx-red-border:    #FCA5A5;
-      --hx-radius:        8px;
-      --hx-radius-lg:     16px;
-      --hx-shadow:        0 2px 8px rgba(0, 0, 0, 0.08);
-      --hx-shadow-lg:     0 8px 24px rgba(0, 0, 0, 0.12);
-      --hx-font:          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --hx-purple:        #542e91;
+      --hx-purple-dark:   #3d1f6e;
+      --hx-purple-mid:    #7a52b8;
+      --hx-purple-light:  #ede9f7;
+      --hx-purple-pale:   #f5f2fc;
+      --hx-orange:        #e85c00;
+      --hx-green:         #27ae60;
+      --hx-green-light:   #f0faf4;
+      --hx-amber:         #d97706;
+      --hx-amber-light:   #fffbeb;
+      --hx-red:           #dc2626;
+      --hx-red-light:     #fef2f2;
+      --hx-no-data:       #9ca3af;
+      --hx-no-data-bg:    #f3f4f6;
+      --gray-50:          #f9fafb;
+      --gray-100:         #f3f4f6;
+      --gray-200:         #e5e7eb;
+      --gray-300:         #d1d5db;
+      --gray-400:         #9ca3af;
+      --gray-500:         #6b7280;
+      --gray-700:         #374151;
+      --gray-900:         #111827;
+      --text-body:        #374151;
+      --text-dark:        #1a1a2e;
+      --radius:           8px;
+      --shadow-sm:        0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md:        0 4px 16px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.07);
+      --shadow-lg:        0 10px 30px rgba(0,0,0,0.12);
+      --max-w:            860px;
+      --font:             -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: var(--hx-font);
-      color: var(--hx-text);
-      background: var(--hx-light-bg);
-      line-height: 1.6;
+      font-family: var(--font);
+      color: var(--text-body);
+      background: #fff;
       font-size: 16px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Skip link ───────────────────────────────────────────── */
-    .skip-link {
-      position: absolute;
-      top: -100%;
-      left: 16px;
-      background: var(--hx-primary);
-      color: white;
-      padding: 8px 16px;
-      border-radius: var(--hx-radius);
-      font-weight: 600;
-      text-decoration: none;
-      z-index: 999;
-    }
-    .skip-link:focus { top: 8px; }
+    a { color: var(--hx-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    /* ── Utility ─────────────────────────────────────────────── */
-    .sr-only {
-      position: absolute; width: 1px; height: 1px;
-      padding: 0; margin: -1px; overflow: hidden;
-      clip: rect(0,0,0,0); border: 0;
-    }
+    img { max-width: 100%; height: auto; display: block; }
 
-    /* ══════════════════════════════════════════════════════════
-       HEADER & NAV
-       ══════════════════════════════════════════════════════════ */
-    .hx-header {
-      background: var(--hx-dark);
+    /* ──────────────────────────────────────
+       NAVIGATION
+    ────────────────────────────────────── */
+    .site-nav {
+      background: #fff;
+      border-bottom: 3px solid var(--hx-purple);
       position: sticky;
       top: 0;
       z-index: 200;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+      box-shadow: var(--shadow-sm);
     }
-    .hx-header-inner {
+    .nav-inner {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
@@ -92,1744 +81,2086 @@
       justify-content: space-between;
       height: 62px;
     }
-    .hx-logo {
+    .nav-logo {
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
       flex-shrink: 0;
     }
-    .hx-logo-mark {
-      width: 36px; height: 36px;
-      background: var(--hx-primary);
-      border-radius: 7px;
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--hx-purple);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #fff;
       font-weight: 900;
-      color: white;
-      font-size: 16px;
-      letter-spacing: -1px;
+      font-size: 17px;
+      letter-spacing: -2px;
       flex-shrink: 0;
     }
-    .hx-logo-text {
-      color: white;
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: -0.3px;
+    .logo-text-wrap { line-height: 1.1; }
+    .logo-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--hx-purple);
+      display: block;
     }
-    .hx-logo-text em { color: var(--hx-primary); font-style: normal; }
-
-    .hx-nav {
+    .logo-tagline {
+      font-size: 10px;
+      color: var(--gray-400);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .nav-links {
       display: flex;
+      gap: 6px;
+      list-style: none;
       align-items: center;
-      gap: 4px;
     }
-    .hx-nav a {
-      color: rgba(255,255,255,0.80);
-      text-decoration: none;
+    .nav-links a {
       font-size: 14px;
       font-weight: 500;
+      color: var(--gray-700);
       padding: 6px 12px;
       border-radius: 6px;
-      transition: color 0.15s, background 0.15s;
+      text-decoration: none;
       white-space: nowrap;
     }
-    .hx-nav a:hover { color: white; background: rgba(255,255,255,0.08); }
-    .hx-nav-cta {
-      background: var(--hx-primary) !important;
-      color: white !important;
-      font-weight: 700 !important;
-      margin-left: 8px;
+    .nav-links a:hover { color: var(--hx-purple); background: var(--hx-purple-pale); }
+    .nav-actions { display: flex; gap: 8px; align-items: center; }
+    .nav-btn {
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
     }
-    .hx-nav-cta:hover { background: var(--hx-primary-dark) !important; }
+    .nav-btn-ghost {
+      color: var(--hx-purple);
+      border: 1.5px solid var(--hx-purple);
+    }
+    .nav-btn-ghost:hover { background: var(--hx-purple-pale); text-decoration: none; }
+    .nav-btn-primary {
+      background: var(--hx-purple);
+      color: #fff;
+      border: none;
+    }
+    .nav-btn-primary:hover { background: var(--hx-purple-dark); text-decoration: none; }
+    .nav-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--gray-200);
+      flex-shrink: 0;
+    }
 
-    @media (max-width: 800px) {
-      .hx-nav-hide { display: none; }
+    /* ──────────────────────────────────────
+       BREADCRUMB
+    ────────────────────────────────────── */
+    .breadcrumb-bar {
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 9px 20px;
     }
-    @media (max-width: 500px) {
-      .hx-nav { gap: 0; }
-      .hx-nav-cta { font-size: 13px !important; padding: 6px 10px !important; }
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       ARTICLE HERO
-       ══════════════════════════════════════════════════════════ */
-    .hx-hero {
-      background: linear-gradient(140deg, var(--hx-dark) 0%, var(--hx-dark-alt) 100%);
-      padding: 48px 20px 64px;
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-    .hx-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .hx-hero-inner {
-      max-width: 780px;
+    .breadcrumb-inner {
+      max-width: 1200px;
       margin: 0 auto;
-      position: relative;
-    }
-    .hx-breadcrumb {
+      font-size: 13px;
+      color: var(--gray-400);
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-bottom: 22px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.55);
       flex-wrap: wrap;
     }
-    .hx-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; }
-    .hx-breadcrumb a:hover { color: rgba(255,255,255,0.85); }
-    .hx-breadcrumb-sep { opacity: 0.35; }
+    .breadcrumb-inner a { color: var(--gray-400); }
+    .breadcrumb-inner a:hover { color: var(--hx-purple); text-decoration: underline; }
+    .breadcrumb-sep { color: var(--gray-300); }
+    .breadcrumb-current { color: var(--gray-700); font-weight: 500; }
 
-    .hx-article-tag {
+    /* ──────────────────────────────────────
+       ARTICLE HERO
+    ────────────────────────────────────── */
+    .article-hero {
+      background: linear-gradient(135deg, var(--hx-purple-dark) 0%, var(--hx-purple) 60%, var(--hx-purple-mid) 100%);
+      color: #fff;
+      padding: 52px 20px 44px;
+    }
+    .article-hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .article-cat-chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255,102,0,0.18);
-      color: #FFB380;
-      border: 1px solid rgba(255,102,0,0.28);
-      padding: 4px 12px;
-      border-radius: 20px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
+      color: #fff;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
       margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.2);
     }
-    .hx-hero h1 {
-      font-size: clamp(22px, 4.5vw, 40px);
-      font-weight: 800;
-      line-height: 1.2;
+    .article-hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      line-height: 1.12;
+      margin-bottom: 14px;
       letter-spacing: -0.5px;
-      margin-bottom: 18px;
     }
-    .hx-hero-lead {
-      font-size: clamp(15px, 2.5vw, 18px);
-      color: rgba(255,255,255,0.78);
-      line-height: 1.55;
-      max-width: 620px;
-      margin-bottom: 26px;
+    .article-hero .subtitle {
+      font-size: clamp(16px, 2.5vw, 19px);
+      opacity: 0.9;
+      max-width: 680px;
+      line-height: 1.5;
+      margin-bottom: 22px;
     }
-    .hx-article-meta {
+    .article-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
+      gap: 16px;
       flex-wrap: wrap;
     }
-    .hx-meta-dot { opacity: 0.35; }
-
-    /* ══════════════════════════════════════════════════════════
-       MAIN LAYOUT
-       ══════════════════════════════════════════════════════════ */
-    .hx-main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 36px 20px 0;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       EDITORIAL CARD
-       ══════════════════════════════════════════════════════════ */
-    .hx-editorial {
-      background: var(--hx-card);
-      border-radius: var(--hx-radius-lg);
-      padding: 32px;
-      margin-bottom: 24px;
-      box-shadow: var(--hx-shadow);
-    }
-    .hx-editorial h2 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--hx-dark);
-      margin-bottom: 18px;
-      line-height: 1.3;
-    }
-    .hx-editorial p {
-      color: var(--hx-text);
-      margin-bottom: 15px;
-      line-height: 1.72;
-    }
-    .hx-editorial p:last-of-type { margin-bottom: 0; }
-    .hx-editorial strong { color: var(--hx-dark); font-weight: 600; }
-
-    .hx-info-note {
-      background: #EFF6FF;
-      border-left: 4px solid #3B82F6;
-      border-radius: 0 var(--hx-radius) var(--hx-radius) 0;
-      padding: 14px 18px;
-      margin-top: 22px;
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       font-size: 13px;
-      color: #1E40AF;
-      line-height: 1.55;
+      opacity: 0.85;
     }
-    .hx-info-note strong { color: #1E40AF; }
+    .meta-pill svg { flex-shrink: 0; }
+    .meta-update-badge {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.3px;
+    }
 
-    /* ══════════════════════════════════════════════════════════
-       TOOL CARD
-       ══════════════════════════════════════════════════════════ */
-    .hx-tool {
-      background: var(--hx-card);
-      border-radius: var(--hx-radius-lg);
-      padding: 32px;
-      margin-bottom: 24px;
-      box-shadow: var(--hx-shadow);
+    /* ──────────────────────────────────────
+       ARTICLE LAYOUT
+    ────────────────────────────────────── */
+    .article-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 40px 20px 60px;
     }
-    .hx-tool-header {
-      margin-bottom: 26px;
-      padding-bottom: 22px;
-      border-bottom: 1px solid var(--hx-border);
+
+    .prose p {
+      color: var(--text-body);
+      font-size: 16px;
+      line-height: 1.78;
+      margin-bottom: 18px;
     }
-    .hx-tool-header h2 {
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--hx-purple);
+      margin: 40px 0 16px;
+      line-height: 1.2;
+    }
+    .prose h3 {
       font-size: 20px;
       font-weight: 700;
-      color: var(--hx-dark);
+      color: var(--text-dark);
+      margin: 28px 0 12px;
+    }
+
+    .info-box {
+      background: var(--hx-purple-pale);
+      border-left: 4px solid var(--hx-purple);
+      padding: 18px 22px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 28px 0;
+    }
+    .info-box-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--hx-purple);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
       margin-bottom: 6px;
     }
-    .hx-tool-header p { font-size: 14px; color: var(--hx-text-muted); }
+    .info-box p {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .info-box strong { color: var(--hx-purple); }
 
-    /* ── Form grid ───────────────────────────────────────────── */
-    .hx-form-grid {
+    /* ──────────────────────────────────────
+       TOOL WIDGET
+    ────────────────────────────────────── */
+    .tool-widget {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 36px 0;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-200);
+    }
+
+    .tool-hd {
+      background: linear-gradient(135deg, var(--hx-purple-dark) 0%, var(--hx-purple) 100%);
+      padding: 26px 30px 22px;
+      color: #fff;
+    }
+    .tool-hd-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .tool-hd h2 {
+      font-size: clamp(19px, 3vw, 24px);
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+    .tool-hd p {
+      font-size: 14px;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    /* Form */
+    .tool-form-section {
+      padding: 26px 30px 28px;
+      background: #fff;
+    }
+    .form-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
     }
-    @media (max-width: 560px) { .hx-form-grid { grid-template-columns: 1fr; } }
-
-    .hx-field { display: flex; flex-direction: column; gap: 5px; }
-    .hx-label {
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .form-field label {
       font-size: 12px;
       font-weight: 700;
-      color: var(--hx-dark);
-      letter-spacing: 0.3px;
+      color: var(--gray-700);
+      letter-spacing: 0.4px;
       text-transform: uppercase;
     }
-    .hx-select, .hx-input {
-      width: 100%;
-      padding: 10px 14px;
-      border: 2px solid var(--hx-border);
-      border-radius: var(--hx-radius);
-      font-family: var(--hx-font);
-      font-size: 15px;
-      color: var(--hx-text);
-      background: white;
-      transition: border-color 0.15s, box-shadow 0.15s;
-      -webkit-appearance: none;
+    .form-field select,
+    .form-field input[type="text"],
+    .form-field input[type="email"] {
+      padding: 10px 36px 10px 12px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 7px;
+      font-size: 14px;
+      color: var(--text-dark);
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7280'/%3E%3C/svg%3E") no-repeat right 12px center;
       appearance: none;
+      -webkit-appearance: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: var(--font);
+      cursor: pointer;
     }
-    .hx-select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 40px;
+    .form-field input[type="email"] {
+      background-image: none;
+      padding-right: 12px;
+      cursor: text;
     }
-    .hx-select:focus, .hx-input:focus {
+    .form-field select:focus,
+    .form-field input:focus {
       outline: none;
-      border-color: var(--hx-primary);
-      box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.12);
+      border-color: var(--hx-purple);
+      box-shadow: 0 0 0 3px rgba(84,46,145,0.12);
     }
-    .hx-date-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .form-field select:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .date-row { display: grid; grid-template-columns: 2fr 1fr; gap: 8px; }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .tool-submit-row { margin-top: 6px; }
+    .tool-submit-btn {
+      width: 100%;
+      background: var(--hx-purple);
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      transition: background 0.15s, transform 0.1s;
+      font-family: var(--font);
+    }
+    .tool-submit-btn:hover { background: var(--hx-purple-dark); }
+    .tool-submit-btn:active { transform: scale(0.99); }
+
+    /* Results */
+    .tool-results {
+      padding: 24px 30px 28px;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      display: none;
+      animation: fadeSlideIn 0.3s ease;
+    }
+    .tool-results.visible { display: block; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ──────────────────────────────────────
+       TIMELINE
+    ────────────────────────────────────── */
+    .timeline-section { margin-bottom: 24px; }
+
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
       gap: 8px;
     }
-
-    .hx-divider {
-      height: 1px;
-      background: var(--hx-border);
-      margin: 24px 0;
+    .timeline-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gray-700);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
     }
-
-    /* ── No-data state ───────────────────────────────────────── */
-    #timeline-section, #no-data-section { display: none; }
-    #timeline-section.vis, #no-data-section.vis { display: block; }
-
-    .hx-no-data {
-      background: #F9FAFB;
-      border: 2px dashed var(--hx-border);
-      border-radius: var(--hx-radius);
-      padding: 32px 24px;
-      text-align: center;
-    }
-    .hx-no-data-icon { font-size: 40px; margin-bottom: 14px; }
-    .hx-no-data h3 {
-      font-size: 17px;
+    .timeline-airline-name {
+      font-size: 13px;
       font-weight: 700;
-      color: var(--hx-dark);
-      margin-bottom: 10px;
-    }
-    .hx-no-data p {
-      font-size: 14px;
-      color: var(--hx-text-muted);
-      line-height: 1.6;
-      max-width: 500px;
-      margin: 0 auto;
+      color: var(--hx-purple);
     }
 
-    /* ══════════════════════════════════════════════════════════
-       TIMELINE VISUALIZATION
-       ══════════════════════════════════════════════════════════ */
-    .hx-tl-header {
+    .timeline-outer {
+      position: relative;
+      padding-top: 28px;
+      padding-bottom: 30px;
+    }
+
+    /* "Jetzt" marker (top) */
+    .marker-now {
+      position: absolute;
+      top: 0;
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      z-index: 5;
     }
-    .hx-tl-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--hx-dark);
-      margin-bottom: 2px;
+    .marker-now-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--hx-purple);
+      background: var(--hx-purple-pale);
+      border: 1.5px solid var(--hx-purple);
+      padding: 2px 7px;
+      border-radius: 10px;
+      white-space: nowrap;
     }
-    .hx-tl-subtitle { font-size: 12px; color: var(--hx-text-muted); }
+    .marker-now-line {
+      width: 2px;
+      height: 10px;
+      background: var(--hx-purple);
+    }
 
-    .hx-legend {
+    /* "Ihre Reise" marker (bottom) */
+    .marker-travel {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .marker-travel-line {
+      width: 2px;
+      height: 10px;
+      background: var(--hx-orange);
+    }
+    .marker-travel-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--hx-orange);
+      background: #fff7ed;
+      border: 1.5px solid var(--hx-orange);
+      padding: 2px 7px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .timeline-bar {
+      display: flex;
+      gap: 3px;
+      height: 48px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .t-seg {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: default;
+      transition: filter 0.12s;
+      min-width: 0;
+    }
+    .t-seg:hover { filter: brightness(1.08); }
+    .t-seg.seg-green  { background: var(--hx-green); }
+    .t-seg.seg-amber  { background: #fbbf24; }
+    .t-seg.seg-red    { background: var(--hx-red); }
+    .t-seg.seg-gray   { background: var(--gray-300); }
+
+    .t-seg .seg-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .t-seg.seg-amber .seg-label { color: #1a1a2e; }
+    .t-seg.seg-gray  .seg-label { color: var(--gray-600); }
+
+    /* Outline for current / travel quarter */
+    .t-seg.is-current { outline: 3px solid var(--hx-purple); outline-offset: -3px; }
+    .t-seg.is-travel  { outline: 3px solid var(--hx-orange);  outline-offset: -3px; }
+    .t-seg.is-current.is-travel { outline: 3px solid var(--hx-orange); outline-offset: -3px; }
+
+    /* Year divider */
+    .t-seg.year-start {
+      border-left: 2px solid rgba(255,255,255,0.5);
+    }
+
+    /* Labels row below bar */
+    .timeline-labels {
+      display: flex;
+      gap: 3px;
+      margin-top: 5px;
+    }
+    .t-lbl {
+      flex: 1;
+      text-align: center;
+      min-width: 0;
+    }
+    .t-lbl-q {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-700);
+      line-height: 1.2;
+    }
+    .t-lbl-y {
+      font-size: 9px;
+      color: var(--gray-400);
+      line-height: 1.2;
+    }
+
+    /* Year headings above bar */
+    .timeline-year-labels {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 6px;
+    }
+    .t-yr-label {
+      flex: 4;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tooltip on hover */
+    .t-seg[title] { cursor: help; }
+
+    /* Legend */
+    .timeline-legend {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+      margin-top: 10px;
     }
-    .hx-legend-item {
+    .legend-item {
       display: flex;
       align-items: center;
       gap: 5px;
       font-size: 11px;
-      color: var(--hx-text-muted);
-      white-space: nowrap;
+      color: var(--gray-500);
     }
-    .hx-legend-swatch {
-      width: 10px; height: 10px;
-      border-radius: 2px;
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
       flex-shrink: 0;
     }
-    .swatch-g { background: var(--hx-green); }
-    .swatch-a { background: var(--hx-amber); }
-    .swatch-r { background: var(--hx-red); }
+    .swatch-green { background: var(--hx-green); }
+    .swatch-amber { background: #fbbf24; }
+    .swatch-red   { background: var(--hx-red); }
+    .swatch-gray  { background: var(--gray-300); }
 
-    /* ── The bar ─────────────────────────────────────────────── */
-    .hx-tl-bar {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 3px;
+    /* ──────────────────────────────────────
+       VERDICT BOX
+    ────────────────────────────────────── */
+    .verdict-box {
+      border-radius: 12px;
+      padding: 22px 26px;
+      border: 2px solid;
       margin-bottom: 6px;
     }
-    .hx-seg {
-      height: 48px;
-      border-radius: 5px;
-      position: relative;
+    .verdict-box.v-green  { background: var(--hx-green-light);  border-color: var(--hx-green); }
+    .verdict-box.v-amber  { background: var(--hx-amber-light);  border-color: #f59e0b; }
+    .verdict-box.v-red    { background: var(--hx-red-light);    border-color: var(--hx-red); }
+    .verdict-box.v-info   { background: var(--hx-purple-pale);  border-color: var(--hx-purple); }
+    .verdict-box.v-gray   { background: var(--gray-100);        border-color: var(--gray-300); }
+
+    .verdict-top {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: default;
-      transition: filter 0.15s;
-    }
-    .hx-seg:hover { filter: brightness(0.9); }
-
-    .hx-seg.seg-g { background: var(--hx-green); }
-    .hx-seg.seg-a { background: var(--hx-amber); }
-    .hx-seg.seg-r { background: var(--hx-red); }
-    .hx-seg.seg-n { background: #D1D5DB; }
-
-    /* NOW marker */
-    .hx-seg.is-now::before {
-      content: 'NOW';
-      position: absolute;
-      bottom: calc(100% + 5px);
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: var(--hx-dark);
-      background: white;
-      border: 1.5px solid var(--hx-dark);
-      padding: 1px 5px;
-      border-radius: 3px;
-      white-space: nowrap;
-      z-index: 2;
-    }
-
-    /* Selected quarter outline */
-    .hx-seg.is-sel {
-      outline: 3px solid var(--hx-dark);
-      outline-offset: 2px;
-      z-index: 1;
-    }
-
-    .hx-seg-pct {
-      font-size: 11px;
-      font-weight: 800;
-      color: rgba(255,255,255,0.95);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-      line-height: 1;
-    }
-
-    /* Tooltip */
-    .hx-seg-tip {
-      position: absolute;
-      bottom: calc(100% + 10px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: #111827;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.15s;
-      z-index: 10;
-    }
-    .hx-seg-tip::after {
-      content: '';
-      position: absolute;
-      top: 100%; left: 50%;
-      transform: translateX(-50%);
-      border: 5px solid transparent;
-      border-top-color: #111827;
-    }
-    .hx-seg:hover .hx-seg-tip { opacity: 1; }
-
-    /* ── Labels ──────────────────────────────────────────────── */
-    .hx-tl-labels {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 3px;
-    }
-    .hx-tl-lbl {
-      font-size: 10px;
-      color: var(--hx-text-muted);
-      text-align: center;
-      line-height: 1.3;
-      font-weight: 600;
-    }
-    .hx-tl-lbl .yr {
-      display: block;
-      font-size: 9px;
-      font-weight: 400;
-      opacity: 0.65;
-    }
-
-    .hx-tl-note {
-      font-size: 12px;
-      color: var(--hx-text-muted);
-      font-style: italic;
-      margin-top: 14px;
-      line-height: 1.5;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       VERDICT PANEL
-       ══════════════════════════════════════════════════════════ */
-    #verdict-section { display: none; margin-top: 22px; }
-    #verdict-section.vis { display: block; }
-
-    .hx-verdict {
-      border-radius: var(--hx-radius);
-      padding: 22px 20px;
-      display: flex;
-      gap: 16px;
       align-items: flex-start;
+      gap: 14px;
     }
-    .hx-verdict.v-g { background: var(--hx-green-bg);  border: 1.5px solid var(--hx-green-border); }
-    .hx-verdict.v-a { background: var(--hx-amber-bg);  border: 1.5px solid var(--hx-amber-border); }
-    .hx-verdict.v-r { background: var(--hx-red-bg);    border: 1.5px solid var(--hx-red-border); }
+    .verdict-icon { font-size: 32px; flex-shrink: 0; line-height: 1; }
 
-    .hx-verdict-icon { font-size: 30px; flex-shrink: 0; margin-top: 1px; }
-    .hx-verdict-body { flex: 1; }
+    .verdict-content { flex: 1; min-width: 0; }
 
-    .hx-verdict-headline {
+    .verdict-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 11px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .v-green  .verdict-badge { background: var(--hx-green); color: #fff; }
+    .v-amber  .verdict-badge { background: #f59e0b; color: #1a1a2e; }
+    .v-red    .verdict-badge { background: var(--hx-red); color: #fff; }
+    .v-info   .verdict-badge { background: var(--hx-purple); color: #fff; }
+    .v-gray   .verdict-badge { background: var(--gray-400); color: #fff; }
+
+    .verdict-headline {
       font-size: 17px;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 8px;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.25;
+      margin-bottom: 10px;
     }
-    .hx-verdict.v-g .hx-verdict-headline { color: #166534; }
-    .hx-verdict.v-a .hx-verdict-headline { color: #92400E; }
-    .hx-verdict.v-r .hx-verdict-headline { color: #991B1B; }
-
-    .hx-verdict-text {
+    .verdict-body {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .verdict-action {
       font-size: 14px;
-      line-height: 1.62;
+      font-weight: 700;
+      color: var(--text-dark);
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 7px;
+      display: inline-block;
+    }
+    .verdict-footnote {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.55;
+    }
+    .verdict-footnote strong { color: var(--gray-700); }
+
+    /* No-data state */
+    .no-data-panel {
+      background: var(--gray-100);
+      border: 2px dashed var(--gray-300);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .no-data-icon { font-size: 40px; margin-bottom: 12px; }
+    .no-data-panel h3 { font-size: 17px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .no-data-panel p  { font-size: 14px; color: var(--text-body); line-height: 1.65; max-width: 500px; margin: 0 auto; }
+    .no-data-panel .no-data-cta {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--hx-purple);
+      background: var(--hx-purple-pale);
+      padding: 8px 18px;
+      border-radius: 20px;
+    }
+
+    /* ──────────────────────────────────────
+       LEAD CAPTURE
+    ────────────────────────────────────── */
+    .lead-widget {
+      background: var(--hx-purple);
+      border-radius: 14px;
+      padding: 32px;
+      margin: 44px 0;
+      color: #fff;
+      box-shadow: var(--shadow-md);
+    }
+    .lead-widget-top { margin-bottom: 22px; }
+    .lead-widget-top h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .lead-widget-top p { font-size: 14px; opacity: 0.88; line-height: 1.5; }
+
+    .lead-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       margin-bottom: 14px;
     }
-    .hx-verdict.v-g .hx-verdict-text { color: #166534; }
-    .hx-verdict.v-a .hx-verdict-text { color: #78350F; }
-    .hx-verdict.v-r .hx-verdict-text { color: #7F1D1D; }
-
-    .hx-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-    .hx-verdict.v-g .hx-badge { background: var(--hx-green); color: white; }
-    .hx-verdict.v-a .hx-badge { background: var(--hx-amber); color: white; }
-    .hx-verdict.v-r .hx-badge { background: var(--hx-red);   color: white; }
-
-    /* ══════════════════════════════════════════════════════════
-       LEAD CAPTURE FORM
-       ══════════════════════════════════════════════════════════ */
-    .hx-lead {
-      background: var(--hx-dark);
-      border-radius: var(--hx-radius-lg);
-      padding: 32px;
-      margin-bottom: 24px;
-      color: white;
-    }
-    .hx-lead h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-    .hx-lead > p { color: rgba(255,255,255,0.68); font-size: 14px; margin-bottom: 26px; }
-
-    .hx-lead .hx-label { color: rgba(255,255,255,0.72); }
-    .hx-lead .hx-input,
-    .hx-lead .hx-select {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.14);
-      color: white;
-    }
-    .hx-lead .hx-input::placeholder { color: rgba(255,255,255,0.3); }
-    .hx-lead .hx-select option { background: #1A2B5E; color: white; }
-    .hx-lead .hx-input:focus,
-    .hx-lead .hx-select:focus { border-color: var(--hx-primary); }
-    .hx-lead .hx-select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    }
-
-    .hx-btn {
-      width: 100%;
-      padding: 14px 24px;
-      background: var(--hx-primary);
-      color: white;
-      border: none;
-      border-radius: var(--hx-radius);
-      font-family: var(--hx-font);
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 0.2px;
-      transition: background 0.15s, transform 0.1s;
-      margin-top: 4px;
-    }
-    .hx-btn:hover { background: var(--hx-primary-dark); }
-    .hx-btn:active { transform: scale(0.99); }
-
-    .hx-form-legal {
+    .lead-field { display: flex; flex-direction: column; gap: 5px; }
+    .lead-field label {
       font-size: 11px;
-      color: rgba(255,255,255,0.35);
-      margin-top: 12px;
-      text-align: center;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
+    .lead-field input,
+    .lead-field select {
+      padding: 11px 14px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 7px;
+      font-size: 14px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-family: var(--font);
+      transition: border-color 0.15s, background 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .lead-field input::placeholder { color: rgba(255,255,255,0.5); }
+    .lead-field input:focus,
+    .lead-field select:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.2);
+    }
+    .lead-field select option { color: var(--text-dark); background: #fff; }
 
-    /* ── Success state ───────────────────────────────────────── */
-    #form-inner.hid { display: none; }
-    #form-success { display: none; text-align: center; padding: 8px 0 4px; }
-    #form-success.vis { display: block; }
-
-    .hx-success-circle {
-      width: 64px; height: 64px;
-      background: var(--hx-green);
-      border-radius: 50%;
-      margin: 0 auto 20px;
+    .consent-row {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
     }
-    .hx-success-title { font-size: 21px; font-weight: 700; margin-bottom: 10px; color: white; }
-    .hx-success-text { font-size: 14px; color: rgba(255,255,255,0.68); line-height: 1.65; }
+    .consent-row input[type="checkbox"] {
+      margin-top: 2px;
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      accent-color: #fff;
+      cursor: pointer;
+    }
+    .consent-row a { color: rgba(255,255,255,0.8); text-decoration: underline; }
 
-    /* ── Validation ──────────────────────────────────────────── */
-    .hx-field-error {
-      font-size: 12px;
-      color: #FCA5A5;
-      margin-top: 3px;
+    .lead-submit-btn {
+      width: 100%;
+      background: #fff;
+      color: var(--hx-purple);
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background 0.15s;
+      letter-spacing: 0.2px;
+    }
+    .lead-submit-btn:hover { background: var(--gray-100); }
+    .lead-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .lead-success-state {
+      text-align: center;
+      padding: 16px 0;
       display: none;
     }
-    .hx-input.invalid { border-color: #EF4444 !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.2) !important; }
+    .lead-success-state.active { display: block; }
+    .lead-success-icon-big { font-size: 52px; margin-bottom: 14px; }
+    .lead-success-state h4 { font-size: 21px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .lead-success-state p { font-size: 15px; color: rgba(255,255,255,0.88); }
 
-    /* ══════════════════════════════════════════════════════════
-       SHARE BLOCK
-       ══════════════════════════════════════════════════════════ */
-    .hx-share {
-      background: var(--hx-card);
-      border-radius: var(--hx-radius-lg);
-      padding: 22px 28px;
-      margin-bottom: 40px;
-      box-shadow: var(--hx-shadow);
+    /* ──────────────────────────────────────
+       SHARE SECTION
+    ────────────────────────────────────── */
+    .share-block {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 32px 0;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
     }
-    .hx-share-text {
-      flex: 1;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--hx-dark);
-      min-width: 180px;
-    }
-    .hx-share-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-    .hx-share-btn {
+    .share-text h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+    .share-text p  { font-size: 13px; color: var(--gray-500); }
+    .share-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .share-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 8px 14px;
-      border-radius: var(--hx-radius);
+      border-radius: 7px;
       font-size: 13px;
-      font-weight: 600;
-      border: 1.5px solid var(--hx-border);
-      background: white;
-      color: var(--hx-text);
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
-      font-family: var(--hx-font);
-    }
-    .hx-share-btn:hover { border-color: var(--hx-primary); color: var(--hx-primary); }
-
-    /* ══════════════════════════════════════════════════════════
-       TOPIC NAV
-       ══════════════════════════════════════════════════════════ */
-    .hx-topics-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 28px 20px;
-    }
-    .hx-topics-label {
-      font-size: 11px;
       font-weight: 700;
-      color: var(--hx-text-muted);
+      cursor: pointer;
+      border: none;
+      font-family: var(--font);
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .share-btn:hover { opacity: 0.85; text-decoration: none; }
+    .share-btn.fb { background: #1877f2; color: #fff; }
+    .share-btn.wa { background: #25d366; color: #fff; }
+    .share-btn.cp { background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200); }
+    .share-btn.cp.copied { background: var(--hx-green-light); color: var(--hx-green); border-color: var(--hx-green); }
+
+    /* ──────────────────────────────────────
+       DISCLAIMER
+    ────────────────────────────────────── */
+    .disclaimer {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 12px;
+      color: var(--gray-400);
+      line-height: 1.65;
+      margin: 32px 0 0;
+    }
+    .disclaimer strong { color: var(--gray-500); }
+
+    /* ──────────────────────────────────────
+       FEATURED ARTICLES GRID
+    ────────────────────────────────────── */
+    .featured-section { margin-top: 56px; }
+    .featured-section h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--hx-purple);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--hx-purple);
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .article-box {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .article-box:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    .article-box-thumb {
+      height: 148px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 46px;
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb-a { background: linear-gradient(135deg, #ede9f7, #c4b5e8); }
+    .thumb-b { background: linear-gradient(135deg, #ecfdf5, #a7f3d0); }
+    .thumb-c { background: linear-gradient(135deg, #eff6ff, #bfdbfe); }
+    .thumb-d { background: linear-gradient(135deg, #fff7ed, #fed7aa); }
+    .article-box-cat {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: var(--hx-purple);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .article-box-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+    .article-box-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .article-box-excerpt {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .article-box-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--hx-purple);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .article-box-link:hover { text-decoration: underline; }
+
+    /* ──────────────────────────────────────
+       THEMEN-NAVIGATION
+    ────────────────────────────────────── */
+    .themen-nav {
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 24px 20px;
+      margin: 52px -20px 0;
+    }
+    .themen-nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .themen-nav h4 {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gray-400);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 12px;
     }
-    .hx-topics { display: flex; flex-wrap: wrap; gap: 8px; }
-    .hx-topic {
-      display: inline-flex;
-      padding: 6px 14px;
+    .themen-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .themen-tag {
+      background: #fff;
+      border: 1.5px solid var(--gray-200);
+      color: var(--gray-700);
+      padding: 6px 16px;
       border-radius: 20px;
-      background: var(--hx-card);
-      border: 1.5px solid var(--hx-border);
       font-size: 13px;
       font-weight: 500;
-      color: var(--hx-text);
       text-decoration: none;
-      transition: border-color 0.15s, color 0.15s;
+      transition: border-color 0.12s, color 0.12s;
     }
-    .hx-topic:hover { border-color: var(--hx-primary); color: var(--hx-primary); }
+    .themen-tag:hover {
+      border-color: var(--hx-purple);
+      color: var(--hx-purple);
+      text-decoration: none;
+    }
 
-    /* ══════════════════════════════════════════════════════════
-       FEATURED ARTICLES
-       ══════════════════════════════════════════════════════════ */
-    .hx-featured {
-      background: white;
-      padding: 52px 20px;
-      border-top: 1px solid var(--hx-border);
+    /* ──────────────────────────────────────
+       SOCIAL + EMAIL SIGNUP STRIP
+    ────────────────────────────────────── */
+    .social-signup-strip {
+      background: var(--hx-purple);
+      color: #fff;
+      padding: 48px 20px;
     }
-    .hx-section-hd {
-      max-width: 1200px;
-      margin: 0 auto 28px;
-      font-size: 21px;
-      font-weight: 700;
-      color: var(--hx-dark);
-    }
-    .hx-articles {
-      max-width: 1200px;
+    .social-signup-inner {
+      max-width: 1000px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
     }
-    @media (max-width: 860px) { .hx-articles { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px) { .hx-articles { grid-template-columns: 1fr; } }
-
-    .hx-article-card {
-      background: white;
-      border-radius: var(--hx-radius);
-      border: 1px solid var(--hx-border);
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
+    .social-col h3, .signup-col h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .social-col p, .signup-col p {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    .social-icons-row {
       display: flex;
-      flex-direction: column;
-      transition: box-shadow 0.2s, transform 0.2s;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .hx-article-card:hover {
-      box-shadow: var(--hx-shadow-lg);
-      transform: translateY(-3px);
-    }
-    .hx-art-thumb {
-      height: 175px;
+    .social-icon-a {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 44px;
+      width: 46px;
+      height: 46px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 10px;
+      font-size: 22px;
+      text-decoration: none;
+      transition: background 0.12s;
+      border: 1px solid rgba(255,255,255,0.15);
     }
-    .hx-art-body {
-      padding: 18px 20px 20px;
-      flex: 1;
+    .social-icon-a:hover { background: rgba(255,255,255,0.25); text-decoration: none; }
+    .signup-row {
       display: flex;
-      flex-direction: column;
+      gap: 8px;
     }
-    .hx-art-tag {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      color: var(--hx-primary);
-      margin-bottom: 7px;
-    }
-    .hx-art-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--hx-dark);
-      line-height: 1.4;
-      margin-bottom: 9px;
-    }
-    .hx-art-excerpt {
-      font-size: 13px;
-      color: var(--hx-text-muted);
-      line-height: 1.55;
+    .signup-row input {
       flex: 1;
+      padding: 12px 14px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 7px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 14px;
+      font-family: var(--font);
     }
-    .hx-art-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 14px;
+    .signup-row input::placeholder { color: rgba(255,255,255,0.55); }
+    .signup-row input:focus { outline: none; border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.2); }
+    .signup-row button {
+      background: #fff;
+      color: var(--hx-purple);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: var(--font);
+      white-space: nowrap;
+      transition: background 0.12s;
+    }
+    .signup-row button:hover { background: var(--gray-100); }
+    .signup-disclaimer {
       font-size: 12px;
-      color: var(--hx-text-muted);
+      opacity: 0.65;
+      margin-top: 8px;
+      line-height: 1.4;
     }
-    .hx-art-more { color: var(--hx-primary); font-weight: 600; }
 
-    /* ══════════════════════════════════════════════════════════
-       SOCIAL SECTION
-       ══════════════════════════════════════════════════════════ */
-    .hx-social {
-      background: var(--hx-light-bg);
-      padding: 48px 20px;
-      border-top: 1px solid var(--hx-border);
-      text-align: center;
+    /* ──────────────────────────────────────
+       APP PROMO
+    ────────────────────────────────────── */
+    .app-promo {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 32px 20px;
     }
-    .hx-social-inner { max-width: 580px; margin: 0 auto; }
-    .hx-social h2 { font-size: 20px; font-weight: 700; color: var(--hx-dark); margin-bottom: 6px; }
-    .hx-social > .hx-social-inner > p { font-size: 14px; color: var(--hx-text-muted); margin-bottom: 26px; }
-    .hx-social-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    .hx-soc-link {
-      display: inline-flex;
+    .app-promo-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
       align-items: center;
-      gap: 7px;
-      padding: 9px 16px;
-      border-radius: 24px;
+      gap: 24px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .app-promo-emoji { font-size: 40px; flex-shrink: 0; }
+    .app-promo-text { flex: 1; min-width: 200px; }
+    .app-promo-text h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .app-promo-text p { font-size: 14px; opacity: 0.72; line-height: 1.4; }
+    .app-store-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .app-store-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 9px;
       font-size: 13px;
       font-weight: 600;
       text-decoration: none;
-      transition: transform 0.15s, opacity 0.15s;
-    }
-    .hx-soc-link:hover { transform: translateY(-2px); opacity: 0.92; }
-    .hx-soc-link svg { flex-shrink: 0; }
-    .soc-fb  { background: #1877F2; color: white; }
-    .soc-ig  { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-    .soc-tt  { background: #000000; color: white; }
-    .soc-bs  { background: #0085FF; color: white; }
-    .soc-yt  { background: #FF0000; color: white; }
-
-    /* ══════════════════════════════════════════════════════════
-       EMAIL SIGNUP
-       ══════════════════════════════════════════════════════════ */
-    .hx-email-sect {
-      background: var(--hx-dark);
-      padding: 60px 20px;
-      text-align: center;
-      color: white;
-    }
-    .hx-email-inner { max-width: 500px; margin: 0 auto; }
-    .hx-email-sect h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
-    .hx-email-sect p { color: rgba(255,255,255,0.65); font-size: 15px; margin-bottom: 28px; }
-    .hx-email-row { display: flex; gap: 8px; }
-    @media (max-width: 480px) { .hx-email-row { flex-direction: column; } }
-    .hx-email-field {
-      flex: 1;
-      padding: 12px 16px;
-      border: 2px solid rgba(255,255,255,0.14);
-      border-radius: var(--hx-radius);
-      background: rgba(255,255,255,0.08);
-      color: white;
-      font-family: var(--hx-font);
-      font-size: 15px;
-    }
-    .hx-email-field::placeholder { color: rgba(255,255,255,0.35); }
-    .hx-email-field:focus { outline: none; border-color: var(--hx-primary); }
-    .hx-email-btn {
-      padding: 12px 22px;
-      background: var(--hx-primary);
-      color: white;
-      border: none;
-      border-radius: var(--hx-radius);
-      font-family: var(--hx-font);
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
+      transition: background 0.12s;
       white-space: nowrap;
-      transition: background 0.15s;
     }
-    .hx-email-btn:hover { background: var(--hx-primary-dark); }
+    .app-store-btn:hover { background: rgba(255,255,255,0.18); text-decoration: none; }
+    .app-store-icon { font-size: 20px; }
 
-    /* ══════════════════════════════════════════════════════════
-       APP PROMO
-       ══════════════════════════════════════════════════════════ */
-    .hx-app {
-      background: white;
-      padding: 52px 20px;
-      border-top: 1px solid var(--hx-border);
-    }
-    .hx-app-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 40px;
-      align-items: center;
-    }
-    @media (max-width: 680px) {
-      .hx-app-inner { grid-template-columns: 1fr; text-align: center; }
-      .hx-app-badges { justify-content: center; }
-    }
-    .hx-app-pill {
-      display: inline-flex;
-      background: var(--hx-primary-light);
-      color: var(--hx-primary);
-      padding: 3px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-    }
-    .hx-app h2 {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--hx-dark);
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .hx-app > .hx-app-inner > div > p {
-      font-size: 15px;
-      color: var(--hx-text-muted);
-      margin-bottom: 22px;
-      line-height: 1.6;
-    }
-    .hx-app-badges { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hx-store {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 18px;
-      background: var(--hx-dark);
-      color: white;
-      border-radius: var(--hx-radius);
-      text-decoration: none;
-      transition: opacity 0.15s;
-    }
-    .hx-store:hover { opacity: 0.88; }
-    .hx-store-icon { font-size: 22px; }
-    .hx-store-copy { font-size: 13px; line-height: 1.3; }
-    .hx-store-copy span { display: block; font-size: 10px; opacity: 0.65; }
-    .hx-store-copy strong { font-size: 14px; }
-    .hx-app-phone { font-size: 88px; line-height: 1; }
-    @media (max-width: 680px) { .hx-app-phone { display: none; } }
-
-    /* ══════════════════════════════════════════════════════════
+    /* ──────────────────────────────────────
        FOOTER
-       ══════════════════════════════════════════════════════════ */
-    .hx-footer {
-      background: #111827;
-      color: rgba(255,255,255,0.55);
-      padding: 48px 20px 28px;
+    ────────────────────────────────────── */
+    footer {
+      background: #0f0f1e;
+      color: rgba(255,255,255,0.65);
+      padding: 52px 20px 24px;
     }
-    .hx-footer-inner { max-width: 1200px; margin: 0 auto; }
-    .hx-footer-grid {
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 36px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
       margin-bottom: 40px;
     }
-    @media (max-width: 760px) { .hx-footer-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 480px) { .hx-footer-grid { grid-template-columns: 1fr; } }
-
-    .hx-footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-    .hx-footer-desc { font-size: 13px; line-height: 1.65; margin-bottom: 12px; }
-    .hx-footer-col h4 {
-      font-size: 11px; font-weight: 700; color: white;
-      text-transform: uppercase; letter-spacing: 0.8px;
+    .footer-col h5 {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
       margin-bottom: 14px;
     }
-    .hx-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-    .hx-footer-col a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: color 0.15s; }
-    .hx-footer-col a:hover { color: white; }
-
-    .hx-footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding-top: 22px;
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 9px; }
+    .footer-col a {
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 12px; opacity: 0.4; }
+    .footer-legal { display: flex; gap: 16px; flex-wrap: wrap; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.75); }
+    .footer-award {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 12px;
     }
 
-    /* ══════════════════════════════════════════════════════════
-       MOBILE REFINEMENTS
-       ══════════════════════════════════════════════════════════ */
+    /* ──────────────────────────────────────
+       UTILITY
+    ────────────────────────────────────── */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* ──────────────────────────────────────
+       RESPONSIVE
+    ────────────────────────────────────── */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-btn-ghost { display: none; }
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .lead-form-grid { grid-template-columns: 1fr; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .social-signup-inner { grid-template-columns: 1fr; gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .tool-hd { padding: 20px 20px 16px; }
+      .tool-form-section { padding: 20px 20px 22px; }
+      .tool-results { padding: 18px 20px 22px; }
+      .lead-widget { padding: 22px 18px; }
+      .timeline-bar { height: 40px; }
+      .t-seg .seg-label { font-size: 9px; }
+      .share-block { flex-direction: column; align-items: flex-start; }
+      .signup-row { flex-direction: column; }
+    }
     @media (max-width: 400px) {
-      .hx-editorial, .hx-tool, .hx-lead { padding: 22px 18px; }
-      .hx-share { padding: 18px 20px; }
-      .hx-seg { height: 40px; }
-      .hx-seg-pct { font-size: 9px; }
-      .hx-tl-lbl { font-size: 9px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .app-promo-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+  <!-- ══════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════ -->
+  <nav class="site-nav" role="navigation" aria-label="Hauptnavigation">
+    <div class="nav-inner">
+      <a href="https://www.holidayextras.de/" class="nav-logo" aria-label="holidayextras.de – Startseite">
+        <div class="logo-mark" aria-hidden="true">hx</div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">holidayextras</span>
+          <span class="logo-tagline">.de</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#">Extras am Flughafen</a></li>
+        <li><a href="#">Reiseversicherung</a></li>
+        <li><a href="#">Kurzurlaub</a></li>
+        <li><a href="#">Reisenews</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="nav-btn nav-btn-ghost">Anmelden</a>
+        <div class="nav-divider" aria-hidden="true"></div>
+        <a href="#" class="nav-btn nav-btn-primary">Parkplatz buchen</a>
+      </div>
+    </div>
+  </nav>
 
-<!-- ══════════════════════════════════════════════════════════
-     HEADER
-     ══════════════════════════════════════════════════════════ -->
-<header class="hx-header" role="banner">
-  <div class="hx-header-inner">
-    <a href="#" class="hx-logo" aria-label="Holiday Extras — home">
-      <div class="hx-logo-mark" aria-hidden="true">HX</div>
-      <span class="hx-logo-text">Holiday <em>Extras</em></span>
-    </a>
-    <nav class="hx-nav" aria-label="Main navigation">
-      <a href="#" class="hx-nav-hide">Airport Parking</a>
-      <a href="#" class="hx-nav-hide">Hotels</a>
-      <a href="#" class="hx-nav-hide">Lounges</a>
-      <a href="#" class="hx-nav-hide">Travel News</a>
-      <a href="#" class="hx-nav-cta">Search Deals</a>
-    </nav>
-  </div>
-</header>
-
-<!-- ══════════════════════════════════════════════════════════
-     ARTICLE HERO
-     ══════════════════════════════════════════════════════════ -->
-<section class="hx-hero" aria-label="Article header">
-  <div class="hx-hero-inner">
-    <nav class="hx-breadcrumb" aria-label="Breadcrumb">
-      <a href="#">Home</a>
-      <span class="hx-breadcrumb-sep" aria-hidden="true">›</span>
-      <a href="#">Travel News</a>
-      <span class="hx-breadcrumb-sep" aria-hidden="true">›</span>
-      <span aria-current="page">Flight Prices</span>
-    </nav>
-    <div class="hx-article-tag" aria-label="Category">⛽ Fuel &amp; Flight Prices</div>
-    <h1>Why your summer 2027 flight could cost more — and what to do about it now</h1>
-    <p class="hx-hero-lead">UK airlines are shielded from today's high fuel prices — for now. Our interactive tracker shows you when that protection runs out, and what it means for when to book.</p>
-    <div class="hx-article-meta" aria-label="Article metadata">
-      <time datetime="2026-03-26">26 March 2026</time>
-      <span class="hx-meta-dot" aria-hidden="true">·</span>
-      <span>7 min read</span>
-      <span class="hx-meta-dot" aria-hidden="true">·</span>
-      <span>Holiday Extras editorial team</span>
+  <!-- ══════════════════════════════════
+       BREADCRUMB
+  ══════════════════════════════════ -->
+  <div class="breadcrumb-bar" role="navigation" aria-label="Brotkrümelnavigation">
+    <div class="breadcrumb-inner">
+      <a href="#">Startseite</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <a href="#">Reisenews</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span class="breadcrumb-current">Treibstoffabsicherungs-Tracker 2026</span>
     </div>
   </div>
-</section>
 
-<!-- ══════════════════════════════════════════════════════════
-     MAIN CONTENT
-     ══════════════════════════════════════════════════════════ -->
-<main class="hx-main" id="main-content">
-
-  <!-- ── Editorial explainer ─────────────────────────────── -->
-  <article class="hx-editorial" aria-label="What is fuel hedging?">
-    <h2>What is fuel hedging, and why should you care about it right now?</h2>
-    <p>Right now, most UK airlines are spending less on fuel than you might expect. Not because prices have dropped — they haven't. Jet fuel costs more in 2026 than at almost any point in recent history, driven by geopolitical pressures and supply uncertainty.</p>
-    <p>The reason airlines aren't feeling it yet is something called <strong>fuel hedging</strong>. Airlines buy contracts months or even years in advance that lock in a fixed price for the fuel they'll need later. If prices rise after that, the airline is protected — they already bought their fuel at the lower price.</p>
-    <p>Most major UK carriers did exactly this in 2023 and 2024, when fuel was cheaper. Their 2026 flying costs are largely shielded from today's higher prices. That protection gets passed on to you — flights this year are cheaper than they'd otherwise be.</p>
-    <p><strong>The problem is those contracts are running out.</strong></p>
-    <p>As each airline's hedged fuel gets used up and they have to buy at today's prices, fares will rise. Some airlines are better protected than others. Some are exposed as early as late 2026. Others may hold through most of 2027 before the impact hits.</p>
-    <p>The tool below uses publicly disclosed figures from airline investor reports to show you where your chosen airline stands — and what it means for your booking decision.</p>
-    <div class="hx-info-note" role="note">
-      <strong>About this data:</strong> Hedging figures are sourced from airline investor communications published in early 2026, accurate as of March 2026. Jet2 and TUI Airways do not disclose their positions. Fuel hedging is one factor in airfare pricing — not the only one, and not a guarantee of price changes.
-    </div>
-  </article>
-
-  <!-- ══════════════════════════════════════════════════════
-       THE TOOL
-       ══════════════════════════════════════════════════════ -->
-  <section class="hx-tool" aria-label="Airline fuel hedge tracker">
-    <div class="hx-tool-header">
-      <h2>Check your airline's fuel protection</h2>
-      <p>Select your airline and travel date to see how well they're hedged — and what it means for booking.</p>
-    </div>
-
-    <div class="hx-form-grid">
-      <div class="hx-field">
-        <label class="hx-label" for="sel-airline">Airline</label>
-        <select class="hx-select" id="sel-airline" aria-label="Select your airline">
-          <option value="">Choose your airline…</option>
-          <option value="easyjet">easyJet</option>
-          <option value="ryanair">Ryanair</option>
-          <option value="ba">British Airways</option>
-          <option value="wizzair">Wizz Air</option>
-          <option value="jet2">Jet2</option>
-          <option value="tui">TUI Airways</option>
-        </select>
+  <!-- ══════════════════════════════════
+       ARTICLE HERO
+  ══════════════════════════════════ -->
+  <header class="article-hero">
+    <div class="article-hero-inner">
+      <div class="article-cat-chip">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="4" stroke="white" stroke-width="1.5"/><line x1="5" y1="2" x2="5" y2="5.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="5" cy="7" r="0.6" fill="white"/></svg>
+        Reisenews
       </div>
-      <div class="hx-field">
-        <label class="hx-label" for="sel-airport">Departure airport</label>
-        <select class="hx-select" id="sel-airport" aria-label="Select your departure airport">
-          <option value="">Choose airport…</option>
-          <option value="LHR">London Heathrow (LHR)</option>
-          <option value="LGW">London Gatwick (LGW)</option>
-          <option value="MAN">Manchester (MAN)</option>
-          <option value="BHX">Birmingham (BHX)</option>
-          <option value="EDI">Edinburgh (EDI)</option>
-          <option value="BRS">Bristol (BRS)</option>
-          <option value="GLA">Glasgow (GLA)</option>
-          <option value="LBA">Leeds Bradford (LBA)</option>
-          <option value="NCL">Newcastle (NCL)</option>
-          <option value="LPL">Liverpool John Lennon (LPL)</option>
-        </select>
-      </div>
-      <div class="hx-field">
-        <label class="hx-label" for="sel-dest">Destination</label>
-        <select class="hx-select" id="sel-dest" aria-label="Select your destination region">
-          <option value="">Choose destination…</option>
-          <optgroup label="Sun destinations">
-            <option value="spain">Spain &amp; the Balearics</option>
-            <option value="greece">Greece &amp; Cyprus</option>
-            <option value="portugal">Portugal &amp; the Canaries</option>
-            <option value="turkey">Turkey</option>
-          </optgroup>
-          <optgroup label="Long-haul">
-            <option value="longhaul">Long-haul destinations</option>
-          </optgroup>
-        </select>
-      </div>
-      <div class="hx-field">
-        <label class="hx-label">Travel date</label>
-        <div class="hx-date-pair">
-          <select class="hx-select" id="sel-month" aria-label="Travel month">
-            <option value="">Month</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-          <select class="hx-select" id="sel-year" aria-label="Travel year">
-            <option value="">Year</option>
-            <option value="2026">2026</option>
-            <option value="2027">2027</option>
-          </select>
-        </div>
+      <h1>Treibstoffabsicherungs-Tracker 2026</h1>
+      <p class="subtitle">Kerosinpreise steigen stark. Wie lange schützen Absicherungsverträge noch vor Preiserhöhungen – und sollten Sie jetzt oder später buchen?</p>
+      <div class="article-meta">
+        <span class="meta-pill">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="11" height="10" rx="1.5" stroke="white" stroke-opacity=".8" stroke-width="1.3"/><line x1="5" y1="1" x2="5" y2="4" stroke="white" stroke-opacity=".8" stroke-width="1.3" stroke-linecap="round"/><line x1="9" y1="1" x2="9" y2="4" stroke="white" stroke-opacity=".8" stroke-width="1.3" stroke-linecap="round"/><line x1="3" y1="7" x2="11" y2="7" stroke="white" stroke-opacity=".8" stroke-width="1.3" stroke-linecap="round"/></svg>
+          1. April 2026
+        </span>
+        <span class="meta-pill">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="5" r="3" stroke="white" stroke-opacity=".8" stroke-width="1.3"/><path d="M2 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="white" stroke-opacity=".8" stroke-width="1.3" stroke-linecap="round"/></svg>
+          holidayextras.de Redaktion
+        </span>
+        <span class="meta-update-badge">Datenstand: März 2026</span>
       </div>
     </div>
+  </header>
 
-    <div class="hx-divider" role="separator"></div>
+  <!-- ══════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════ -->
+  <main id="main-content">
+    <article class="article-wrap">
 
-    <!-- No-data state -->
-    <div id="no-data-section" role="region" aria-label="Data unavailable" aria-live="polite">
-      <div class="hx-no-data">
-        <div class="hx-no-data-icon" aria-hidden="true">📊</div>
-        <h3 id="no-data-title">This airline doesn't publish hedging data</h3>
-        <p id="no-data-msg"></p>
+      <!-- ─── EDITORIAL INTRO ─── -->
+      <section class="prose" aria-labelledby="intro-heading">
+        <h2 id="intro-heading">Was ist Treibstoffabsicherung – und warum ist sie jetzt so wichtig?</h2>
+
+        <p>Wussten Sie, dass die Flugpreise, die Sie heute sehen, häufig nicht den echten Kerosinpreis von heute widerspiegeln? Viele Fluggesellschaften kaufen ihren Treibstoff Monate oder sogar Jahre im Voraus – zu einem vorab festgelegten Preis. Diese Praxis heißt <strong>Treibstoffabsicherung</strong> (englisch: Fuel Hedging). Sie schützt Airlines – und damit auch ihre Fluggäste – vor plötzlichen Preissprüngen am Ölmarkt.</p>
+
+        <p>Das klingt technisch, ist aber ganz einfach: Wenn der Kerosinpreis stark steigt, zahlt eine gut abgesicherte Airline trotzdem den günstigeren Preis, den sie sich lange vorher gesichert hat. Das bedeutet stabile Flugpreise für Sie. Sobald diese Absicherungsverträge jedoch auslaufen, muss die Airline den Treibstoff zum aktuellen Marktpreis kaufen – und gibt diese Mehrkosten über kurz oder lang an die Passagiere weiter.</p>
+
+        <p>Im Jahr 2026 ist genau das die entscheidende Frage: <strong>Die Kerosinpreise sind aufgrund geopolitischer Spannungen stark gestiegen</strong>, und die Absicherungsverträge der großen deutschen Urlaubsairlines laufen schrittweise aus. Lufthansa ist für 2026 noch sehr gut geschützt. Ryanair ebenfalls. Aber für 2027 haben viele Airlines noch keine neuen Verträge abgeschlossen – und der Schutz, den diese Absicherungen boten, wird knapper.</p>
+
+        <div class="info-box" role="note">
+          <div class="info-box-title">Das Wichtigste in Kürze</div>
+          <p><strong>Gut abgesichert (Grün):</strong> Über 70 % des Kerosinbedarfs sind zu günstigen Preisen gesichert – Preiserhöhungen sind unwahrscheinlich. <strong>Teilweise abgesichert (Gelb):</strong> 40–70 % Absicherung – ein gewisses Risiko besteht. <strong>Wenig/kein Schutz (Rot):</strong> Unter 40 % – Preiserhöhungen sind wahrscheinlich. <strong>Keine Daten:</strong> Einige Airlines veröffentlichen ihre Absicherungsquoten nicht; wir erfinden keine Zahlen.</p>
+        </div>
+
+        <p>Unser Tool unten zeigt Ihnen, wie gut die Absicherung Ihrer gewählten Airline für jeden Zeitraum von Q1 2026 bis Q4 2027 aktuell ist – und ob Sie Ihr Reisedatum mit einem günstigen Absicherungsfenster kombinieren können. Eine Garantie ist das nicht: Flugpreise werden von vielen Faktoren beeinflusst. Aber es ist ein echter Anhaltspunkt für Ihre Buchungsentscheidung.</p>
+      </section>
+
+      <!-- ─── TOOL WIDGET ─── -->
+      <section aria-labelledby="tool-heading">
+        <div class="tool-widget" id="hedgeTool">
+
+          <!-- Tool Header -->
+          <div class="tool-hd">
+            <div class="tool-hd-badge">
+              <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1l1.2 2.4 2.7.4-2 1.9.5 2.7L5 7.3 2.6 8.4l.5-2.7-2-1.9 2.7-.4z" fill="white" fill-opacity=".7"/></svg>
+              Interaktives Tool
+            </div>
+            <h2 id="tool-heading">Wie gut ist Ihre Airline abgesichert?</h2>
+            <p>Wählen Sie Ihre Airline und Ihr Reisedatum – wir zeigen Ihnen die Absicherungslage und was das für Sie bedeutet.</p>
+          </div>
+
+          <!-- Tool Form -->
+          <div class="tool-form-section">
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label for="sel-airline">Airline</label>
+                <select id="sel-airline" aria-required="true">
+                  <option value="">— Airline wählen —</option>
+                  <option value="lufthansa">Lufthansa</option>
+                  <option value="eurowings">Eurowings</option>
+                  <option value="ryanair">Ryanair</option>
+                  <option value="condor">Condor</option>
+                  <option value="tuifly">TUIfly Deutschland</option>
+                  <option value="sunexpress">SunExpress</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="sel-airport">Abflughafen</label>
+                <select id="sel-airport" aria-required="true">
+                  <option value="">— Flughafen wählen —</option>
+                  <option value="FRA">Frankfurt am Main (FRA)</option>
+                  <option value="MUC">München (MUC)</option>
+                  <option value="DUS">Düsseldorf (DUS)</option>
+                  <option value="BER">Berlin Brandenburg (BER)</option>
+                  <option value="HAM">Hamburg (HAM)</option>
+                  <option value="STR">Stuttgart (STR)</option>
+                  <option value="CGN">Köln/Bonn (CGN)</option>
+                  <option value="HAJ">Hannover (HAJ)</option>
+                  <option value="NUE">Nürnberg (NUE)</option>
+                  <option value="LEJ">Leipzig/Halle (LEJ)</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="sel-dest">Reiseziel</label>
+                <select id="sel-dest" aria-required="true">
+                  <option value="">— Reiseziel wählen —</option>
+                  <optgroup label="Beliebteste Ziele">
+                    <option value="balearen">Spanien / Balearen (Mallorca, Ibiza, Menorca)</option>
+                    <option value="kanaren">Portugal / Kanarische Inseln (Teneriffa, Gran Canaria)</option>
+                    <option value="griechenland">Griechenland / Zypern (Kreta, Rhodos, Korfu)</option>
+                    <option value="tuerkei">Türkei (Antalya, Bodrum, Istanbul)</option>
+                  </optgroup>
+                  <optgroup label="Fernreisen">
+                    <option value="usa">USA / Karibik</option>
+                    <option value="asien">Asien (Thailand, Indonesien, Südostasien)</option>
+                    <option value="emirate">Dubai / Vereinigte Arabische Emirate</option>
+                    <option value="sonstiges">Sonstiges / Andere</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="sel-month">Reisedatum (Monat &amp; Jahr)</label>
+                <div class="date-row">
+                  <select id="sel-month" aria-required="true" aria-label="Reisemonat">
+                    <option value="">Monat</option>
+                    <option value="4">April</option>
+                    <option value="5">Mai</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Dezember</option>
+                  </select>
+                  <select id="sel-year" aria-required="true" aria-label="Reisejahr">
+                    <option value="">Jahr</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                  </select>
+                </div>
+                <div class="form-note">Abflughafen und Reiseziel werden für Ihren Preisalarm gespeichert – die Absicherungsanalyse basiert auf der Airline.</div>
+              </div>
+            </div>
+            <div class="tool-submit-row">
+              <button type="button" class="tool-submit-btn" id="btnCheck" onclick="runHedgeCheck()">
+                Absicherung jetzt prüfen →
+              </button>
+            </div>
+          </div>
+
+          <!-- Results (hidden until form submit) -->
+          <div class="tool-results" id="toolResults" role="region" aria-live="polite" aria-label="Ergebnis der Absicherungsprüfung">
+            <div class="timeline-section">
+              <div class="timeline-header">
+                <span class="timeline-title">Absicherungsübersicht</span>
+                <span class="timeline-airline-name" id="timelineAirlineName"></span>
+              </div>
+
+              <!-- Year labels -->
+              <div class="timeline-year-labels" aria-hidden="true">
+                <div class="t-yr-label">2026</div>
+                <div class="t-yr-label">2027</div>
+              </div>
+
+              <!-- Bar + markers -->
+              <div class="timeline-outer">
+                <div class="marker-now" id="markerNow" aria-hidden="true">
+                  <span class="marker-now-label">Jetzt</span>
+                  <span class="marker-now-line"></span>
+                </div>
+                <div class="marker-travel" id="markerTravel" style="display:none" aria-hidden="true">
+                  <span class="marker-travel-line"></span>
+                  <span class="marker-travel-label">✈ Ihre Reise</span>
+                </div>
+                <div class="timeline-bar" id="timelineBar" role="img" aria-label="Absicherungsbalken"></div>
+              </div>
+
+              <div class="timeline-labels" id="timelineLabels" aria-hidden="true"></div>
+
+              <div class="timeline-legend" role="list" aria-label="Legende">
+                <div class="legend-item" role="listitem"><span class="legend-swatch swatch-green"></span>Gut abgesichert (&gt;70%)</div>
+                <div class="legend-item" role="listitem"><span class="legend-swatch swatch-amber"></span>Teilweise (40–70%)</div>
+                <div class="legend-item" role="listitem"><span class="legend-swatch swatch-red"></span>Wenig/kein Schutz (&lt;40%)</div>
+                <div class="legend-item" role="listitem"><span class="legend-swatch swatch-gray"></span>Keine Daten</div>
+              </div>
+            </div>
+
+            <!-- Verdict -->
+            <div id="verdictArea"></div>
+          </div>
+
+        </div><!-- /.tool-widget -->
+      </section>
+
+      <!-- ─── POST-TOOL CONTENT ─── -->
+      <section class="prose" aria-labelledby="booking-heading">
+        <h2 id="booking-heading">Was bedeutet das für meine Buchungsentscheidung?</h2>
+
+        <p>Treibstoffabsicherung ist nur einer von vielen Faktoren, die Flugpreise beeinflussen. Neben dem Kerosinpreis spielen Nachfrage, Saisonalität, Wettbewerb und die allgemeine Wirtschaftslage eine Rolle. Unsere Analyse sagt Ihnen deshalb nicht mit Sicherheit, dass Preise steigen <em>werden</em> – aber sie gibt Ihnen einen realen Anhaltspunkt.</p>
+
+        <p>Wenn Ihre Airline für Ihren Reisezeitraum gut abgesichert ist, bedeutet das: Die Airline ist aktuell weniger druckberechtigt, Kerosinkosten weiterzugeben. Wenn die Absicherung dünn oder nicht vorhanden ist, bedeutet das: Die Kosten treffen die Airline ungeschützt – und könnten in Form höherer Ticketpreise oder Treibstoffzuschläge an Sie weitergegeben werden.</p>
+
+        <p><strong>Unser Rat für 2026/2027:</strong> Für Reisen nach Sommer 2027 empfehlen wir eine frühzeitige Buchung – für alle Airlines, unabhängig von den Absicherungsdaten. Die Unsicherheit über neue Verträge ist real, und wer wartet, riskiert, dass er zu Marktpreisen buchen muss, die deutlich höher liegen als heute.</p>
+      </section>
+
+      <!-- ─── LEAD CAPTURE ─── -->
+      <div class="lead-widget" id="leadCapture">
+        <div id="leadFormWrap">
+          <div class="lead-widget-top">
+            <h3>Preisalarm einrichten</h3>
+            <p>Wir benachrichtigen Sie, sobald sich die Absicherungslage Ihrer Airline ändert oder neue Daten für 2027 verfügbar sind. Kostenlos und jederzeit abbestellbar.</p>
+          </div>
+          <form id="leadForm" onsubmit="handleLeadSubmit(event)" novalidate>
+            <div class="lead-form-grid">
+              <div class="lead-field">
+                <label for="lf-name">Vorname</label>
+                <input type="text" id="lf-name" name="name" placeholder="z. B. Maria" autocomplete="given-name" required>
+              </div>
+              <div class="lead-field">
+                <label for="lf-email">E-Mail-Adresse</label>
+                <input type="email" id="lf-email" name="email" placeholder="ihre@email.de" autocomplete="email" required>
+              </div>
+              <div class="lead-field">
+                <label for="lf-airline">Airline</label>
+                <select id="lf-airline" name="airline" required>
+                  <option value="">— Airline wählen —</option>
+                  <option value="lufthansa">Lufthansa</option>
+                  <option value="eurowings">Eurowings</option>
+                  <option value="ryanair">Ryanair</option>
+                  <option value="condor">Condor</option>
+                  <option value="tuifly">TUIfly Deutschland</option>
+                  <option value="sunexpress">SunExpress</option>
+                </select>
+              </div>
+              <div class="lead-field">
+                <label for="lf-travel">Ungefähres Reisedatum</label>
+                <input type="text" id="lf-travel" name="travelDate" placeholder="z. B. August 2027" autocomplete="off">
+              </div>
+            </div>
+            <div class="consent-row">
+              <input type="checkbox" id="lf-consent" name="consent" required>
+              <label for="lf-consent">Ich stimme zu, dass holidayextras.de mich per E-Mail zu Änderungen der Treibstoffabsicherung und verwandten Reisethemen benachrichtigt. Weitere Informationen finden Sie in unserer <a href="#">Datenschutzerklärung</a>. Abmeldung jederzeit möglich.</label>
+            </div>
+            <button type="submit" class="lead-submit-btn">Preisalarm aktivieren 🔔</button>
+          </form>
+        </div>
+        <div class="lead-success-state" id="leadSuccess">
+          <div class="lead-success-icon-big">✅</div>
+          <h4>Anmeldung erfolgreich!</h4>
+          <p>Wir benachrichtigen Sie, sobald sich etwas ändert. Prüfen Sie Ihren Posteingang – wir haben Ihnen eine Bestätigung geschickt.</p>
+        </div>
       </div>
-    </div>
 
-    <!-- Timeline -->
-    <div id="timeline-section" role="region" aria-label="Fuel hedge timeline" aria-live="polite">
-
-      <div class="hx-tl-header">
-        <div>
-          <div class="hx-tl-title" id="tl-title"></div>
-          <div class="hx-tl-subtitle">% of fuel requirements pre-purchased at locked-in prices</div>
+      <!-- ─── SHARE ─── -->
+      <div class="share-block">
+        <div class="share-text">
+          <h4>Diese Information weiterteilen</h4>
+          <p>Kennen Sie jemanden, der die gleiche Reise plant?</p>
         </div>
-        <div class="hx-legend" aria-label="Colour key">
-          <div class="hx-legend-item">
-            <div class="hx-legend-swatch swatch-g" aria-hidden="true"></div>
-            <span>Well covered (&gt;70%)</span>
-          </div>
-          <div class="hx-legend-item">
-            <div class="hx-legend-swatch swatch-a" aria-hidden="true"></div>
-            <span>Partial (40–70%)</span>
-          </div>
-          <div class="hx-legend-item">
-            <div class="hx-legend-swatch swatch-r" aria-hidden="true"></div>
-            <span>Low cover (&lt;40%)</span>
-          </div>
+        <div class="share-btns">
+          <button class="share-btn fb" onclick="shareToFacebook()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook
+          </button>
+          <button class="share-btn wa" onclick="shareToWhatsApp()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            WhatsApp
+          </button>
+          <button class="share-btn cp" id="copyBtn" onclick="copyLink()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            Link kopieren
+          </button>
         </div>
       </div>
 
-      <div class="hx-tl-bar" id="tl-bar" role="list" aria-label="Quarterly hedge coverage"></div>
-      <div class="hx-tl-labels" id="tl-labels" aria-hidden="true"></div>
-      <p class="hx-tl-note" id="tl-note"></p>
+      <!-- ─── DISCLAIMER ─── -->
+      <div class="disclaimer" role="note">
+        <strong>Hinweis zu den Daten:</strong> Alle Absicherungsquoten basieren auf öffentlich zugänglichen Investor- und Unternehmenskommunikationen (Stand: März 2026). Die Daten werden manuell und vierteljährlich aktualisiert. Sie stellen keine Finanzberatung dar und sind illustrativ. Flugpreise werden von vielen Faktoren beeinflusst – Treibstoffabsicherung ist nur einer davon. Einige Airlines (Eurowings, Condor, TUIfly, SunExpress) veröffentlichen keine detaillierten Absicherungsquoten; für diese Airlines werden keine Schätzungen gemacht. Reisewarnungen finden Sie beim <a href="https://www.auswaertiges-amt.de/de/ReiseUndSicherheit" target="_blank" rel="noopener">Auswärtigen Amt</a>.
+      </div>
 
-      <!-- Verdict -->
-      <div id="verdict-section" role="region" aria-label="Booking recommendation" aria-live="polite">
-        <div class="hx-verdict" id="verdict-card">
-          <div class="hx-verdict-icon" id="verdict-icon" aria-hidden="true"></div>
-          <div class="hx-verdict-body">
-            <h3 class="hx-verdict-headline" id="verdict-headline"></h3>
-            <p class="hx-verdict-text" id="verdict-text"></p>
-            <span class="hx-badge" id="verdict-badge"></span>
+      <!-- ─── FEATURED ARTICLES ─── -->
+      <section class="featured-section" aria-labelledby="featured-heading">
+        <h2 id="featured-heading">Das könnte Sie auch interessieren</h2>
+        <div class="articles-grid">
+
+          <a href="#" class="article-box" aria-label="Artikel: Jetzt oder später buchen?">
+            <div class="article-box-thumb thumb-a">
+              ✈️
+              <span class="article-box-cat">Reiseplanung</span>
+            </div>
+            <div class="article-box-body">
+              <div class="article-box-title">Jetzt oder später buchen? Der große Flugpreis-Guide für 2026</div>
+              <div class="article-box-excerpt">Wann ist der beste Zeitpunkt, Flüge zu buchen? Wir erklären, welche Faktoren Flugpreise beeinflussen und wann Frühbucher wirklich sparen.</div>
+              <span class="article-box-link">Mehr lesen</span>
+            </div>
+          </a>
+
+          <a href="#" class="article-box" aria-label="Artikel: Handgepäck-Regeln 2026">
+            <div class="article-box-thumb thumb-b">
+              🧳
+              <span class="article-box-cat">Reisetipps</span>
+            </div>
+            <div class="article-box-body">
+              <div class="article-box-title">Handgepäck-Regeln 2026: Was erlauben Lufthansa, Ryanair &amp; Co.?</div>
+              <div class="article-box-excerpt">Größen, Gewichte, Gebühren – alle wichtigen Handgepäckregelungen der großen deutschen Urlaubsairlines im Überblick.</div>
+              <span class="article-box-link">Mehr lesen</span>
+            </div>
+          </a>
+
+          <a href="#" class="article-box" aria-label="Artikel: Parkplatz am Flughafen sparen">
+            <div class="article-box-thumb thumb-c">
+              🅿️
+              <span class="article-box-cat">Flughafen</span>
+            </div>
+            <div class="article-box-body">
+              <div class="article-box-title">Parkplatz am Flughafen: So sparen Sie bis zu 60% beim Parken</div>
+              <div class="article-box-excerpt">Vorbuchen lohnt sich – besonders in Frankfurt, München und Düsseldorf. Unser Vergleich zeigt, wie viel Sie sparen können.</div>
+              <span class="article-box-link">Mehr lesen</span>
+            </div>
+          </a>
+
+          <a href="#" class="article-box" aria-label="Artikel: Reiseversicherung 2026">
+            <div class="article-box-thumb thumb-d">
+              🛡️
+              <span class="article-box-cat">Versicherung</span>
+            </div>
+            <div class="article-box-body">
+              <div class="article-box-title">Reiserücktrittsversicherung 2026: Was ist bei steigenden Preisen sinnvoll?</div>
+              <div class="article-box-excerpt">Wenn Flugpreise steigen, steigt auch der finanzielle Schaden bei Stornierungen. Wir erklären, wann eine Reiseversicherung sich wirklich lohnt.</div>
+              <span class="article-box-link">Mehr lesen</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ─── THEMEN NAVIGATION ─── -->
+      <nav class="themen-nav" aria-label="Themen-Navigation">
+        <div class="themen-nav-inner">
+          <h4>Verwandte Themen</h4>
+          <div class="themen-tags">
+            <a href="#" class="themen-tag">Flugpreise</a>
+            <a href="#" class="themen-tag">Sommerurlaub 2026</a>
+            <a href="#" class="themen-tag">Mallorca</a>
+            <a href="#" class="themen-tag">Frühbucher</a>
+            <a href="#" class="themen-tag">Lufthansa</a>
+            <a href="#" class="themen-tag">Ryanair</a>
+            <a href="#" class="themen-tag">Flughafen Frankfurt</a>
+            <a href="#" class="themen-tag">Griechenland</a>
+            <a href="#" class="themen-tag">Türkei-Urlaub</a>
+            <a href="#" class="themen-tag">Urlaubstipps</a>
+            <a href="#" class="themen-tag">Reiseversicherung</a>
           </div>
         </div>
+      </nav>
+
+    </article>
+  </main>
+
+  <!-- ══════════════════════════════════
+       SOCIAL + NEWSLETTER STRIP
+  ══════════════════════════════════ -->
+  <section class="social-signup-strip" aria-labelledby="social-heading">
+    <div class="social-signup-inner">
+      <div class="social-col">
+        <h3 id="social-heading">holidayextras.de folgen</h3>
+        <p>Reise-Tipps, Sonderangebote und Neuigkeiten direkt in Ihrem Feed.</p>
+        <div class="social-icons-row">
+          <a href="#" class="social-icon-a" aria-label="Facebook" title="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-icon-a" aria-label="Instagram" title="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+          </a>
+          <a href="#" class="social-icon-a" aria-label="TikTok" title="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.47a8.25 8.25 0 004.84 1.55V6.57a4.85 4.85 0 01-1.07.12z"/></svg>
+          </a>
+          <a href="#" class="social-icon-a" aria-label="Bluesky" title="Bluesky">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 7.5c0 2.5-1.5 5-4.5 6.5-3-1.5-4.5-4-4.5-6.5 0-1.5.8-2.5 2-2.5.8 0 1.5.4 2.5 1.5 1-1.1 1.7-1.5 2.5-1.5 1.2 0 2 1 2 2.5z"/></svg>
+          </a>
+          <a href="#" class="social-icon-a" aria-label="YouTube" title="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45a2.78 2.78 0 00-1.95 1.97A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="signup-col">
+        <h3>Reise-Newsletter</h3>
+        <p>Preiswarnungen, Tipps und exklusive Angebote direkt in Ihrem Postfach. Kostenlos, wöchentlich.</p>
+        <form onsubmit="handleNewsletterSignup(event)">
+          <div class="signup-row">
+            <input type="email" id="newsletter-email" placeholder="ihre@email.de" aria-label="E-Mail-Adresse für Newsletter" required>
+            <button type="submit">Anmelden</button>
+          </div>
+          <div class="signup-disclaimer">Mit der Anmeldung stimmen Sie unserer <a href="#" style="color:rgba(255,255,255,0.65);">Datenschutzerklärung</a> zu. Abmeldung jederzeit möglich.</div>
+        </form>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       LEAD CAPTURE FORM
-       ══════════════════════════════════════════════════════ -->
-  <section class="hx-lead" aria-label="Price alert sign-up">
-    <h2>Get an alert when your airline's window is narrowing</h2>
-    <p>We'll let you know when the window to book at today's prices is getting smaller — one email, no spam.</p>
-
-    <div id="form-inner">
-      <div class="hx-form-grid">
-        <div class="hx-field">
-          <label class="hx-label" for="lead-name">Your first name</label>
-          <input class="hx-input" type="text" id="lead-name" placeholder="e.g. Sarah" autocomplete="given-name" />
-        </div>
-        <div class="hx-field">
-          <label class="hx-label" for="lead-email">Email address <span aria-hidden="true">*</span></label>
-          <input class="hx-input" type="email" id="lead-email" placeholder="you@example.com" autocomplete="email" required aria-required="true" />
-          <span class="hx-field-error" id="email-error" role="alert">Please enter a valid email address.</span>
-        </div>
-        <div class="hx-field">
-          <label class="hx-label" for="lead-airline">Your airline</label>
-          <select class="hx-select" id="lead-airline" aria-label="Select airline for alert">
-            <option value="">Select airline…</option>
-            <option value="easyjet">easyJet</option>
-            <option value="ryanair">Ryanair</option>
-            <option value="ba">British Airways</option>
-            <option value="wizzair">Wizz Air</option>
-            <option value="jet2">Jet2</option>
-            <option value="tui">TUI Airways</option>
-          </select>
-        </div>
-        <div class="hx-field">
-          <label class="hx-label">Travel month</label>
-          <div class="hx-date-pair">
-            <select class="hx-select" id="lead-month" aria-label="Travel month for alert">
-              <option value="">Month</option>
-              <option value="1">Jan</option>
-              <option value="2">Feb</option>
-              <option value="3">Mar</option>
-              <option value="4">Apr</option>
-              <option value="5">May</option>
-              <option value="6">Jun</option>
-              <option value="7">Jul</option>
-              <option value="8">Aug</option>
-              <option value="9">Sep</option>
-              <option value="10">Oct</option>
-              <option value="11">Nov</option>
-              <option value="12">Dec</option>
-            </select>
-            <select class="hx-select" id="lead-year" aria-label="Travel year for alert">
-              <option value="">Year</option>
-              <option value="2026">2026</option>
-              <option value="2027">2027</option>
-            </select>
-          </div>
-        </div>
+  <!-- ══════════════════════════════════
+       APP PROMO
+  ══════════════════════════════════ -->
+  <div class="app-promo">
+    <div class="app-promo-inner">
+      <div class="app-promo-emoji">📱</div>
+      <div class="app-promo-text">
+        <h3>holidayextras App – bis zu 10% Rabatt</h3>
+        <p>Parken, Lounges und Hotels am Flughafen buchen – direkt auf Ihrem Smartphone. Exklusive App-Angebote inklusive.</p>
       </div>
-
-      <button class="hx-btn" id="lead-submit" type="button">
-        Alert me when prices are about to change →
-      </button>
-      <p class="hx-form-legal">No spam. One email when it matters. Unsubscribe any time.</p>
-    </div>
-
-    <!-- Success state (shown after submit) -->
-    <div id="form-success" role="alert" aria-live="assertive">
-      <div class="hx-success-circle" aria-hidden="true">✓</div>
-      <h3 class="hx-success-title" id="success-msg">You're on the list.</h3>
-      <p class="hx-success-text">We'll send one email when your airline's fuel protection starts running low and the booking window is narrowing. Keep an eye on your inbox.</p>
-    </div>
-  </section>
-
-  <!-- Share -->
-  <div class="hx-share" aria-label="Share this article">
-    <p class="hx-share-text">Know someone planning the same trip? Send them this.</p>
-    <div class="hx-share-btns">
-      <button class="hx-share-btn" onclick="doShare()" aria-label="Share this page">
-        <span aria-hidden="true">↗</span> Share
-      </button>
-      <button class="hx-share-btn" id="copy-btn" onclick="copyLink(this)" aria-label="Copy link to clipboard">
-        <span aria-hidden="true">🔗</span> Copy link
-      </button>
-    </div>
-  </div>
-
-</main>
-
-<!-- ══════════════════════════════════════════════════════════
-     TOPIC NAV
-     ══════════════════════════════════════════════════════════ -->
-<nav class="hx-topics-wrap" aria-label="Related topics">
-  <p class="hx-topics-label">Related topics</p>
-  <div class="hx-topics">
-    <a href="#" class="hx-topic">Flight prices</a>
-    <a href="#" class="hx-topic">Summer 2027</a>
-    <a href="#" class="hx-topic">easyJet</a>
-    <a href="#" class="hx-topic">Ryanair</a>
-    <a href="#" class="hx-topic">British Airways</a>
-    <a href="#" class="hx-topic">Wizz Air</a>
-    <a href="#" class="hx-topic">Jet2</a>
-    <a href="#" class="hx-topic">TUI</a>
-    <a href="#" class="hx-topic">Spain holidays</a>
-    <a href="#" class="hx-topic">Greece holidays</a>
-    <a href="#" class="hx-topic">Budget airlines</a>
-    <a href="#" class="hx-topic">Booking tips</a>
-    <a href="#" class="hx-topic">Package holidays</a>
-  </div>
-</nav>
-
-<!-- ══════════════════════════════════════════════════════════
-     FEATURED ARTICLES
-     ══════════════════════════════════════════════════════════ -->
-<section class="hx-featured" aria-label="More from Holiday Extras Travel News">
-  <h2 class="hx-section-hd">More from Travel News</h2>
-  <div class="hx-articles">
-
-    <a href="#" class="hx-article-card" aria-label="Read: Lounge bookings surge article">
-      <div class="hx-art-thumb" style="background: linear-gradient(135deg, #1A2B5E 0%, #2D4A8A 100%);" aria-hidden="true">✈️</div>
-      <div class="hx-art-body">
-        <div class="hx-art-tag">Airport Lounges</div>
-        <h3 class="hx-art-title">Lounge bookings surge as travellers seek airport calm</h3>
-        <p class="hx-art-excerpt">More passengers are pre-booking airport lounges than ever before — and availability is tighter than you might expect this summer.</p>
-        <div class="hx-art-footer">
-          <time datetime="2026-03-22">22 March 2026</time>
-          <span class="hx-art-more">Read more →</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="#" class="hx-article-card" aria-label="Read: Airport parking costs ranked article">
-      <div class="hx-art-thumb" style="background: linear-gradient(135deg, #166534 0%, #22C55E 100%);" aria-hidden="true">🅿️</div>
-      <div class="hx-art-body">
-        <div class="hx-art-tag">Airport Parking</div>
-        <h3 class="hx-art-title">Airport parking costs: UK's most and least expensive airports ranked</h3>
-        <p class="hx-art-excerpt">We compared on-airport parking at all 10 major UK airports. The gaps between the cheapest and priciest are bigger than you'd think.</p>
-        <div class="hx-art-footer">
-          <time datetime="2026-03-19">19 March 2026</time>
-          <span class="hx-art-more">Read more →</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="#" class="hx-article-card" aria-label="Read: ATOL protection changes article">
-      <div class="hx-art-thumb" style="background: linear-gradient(135deg, #7F1D1D 0%, #EF4444 100%);" aria-hidden="true">🛡️</div>
-      <div class="hx-art-body">
-        <div class="hx-art-tag">Travel Insurance</div>
-        <h3 class="hx-art-title">What ATOL changes mean for package holiday protection in 2026</h3>
-        <p class="hx-art-excerpt">Changes to ATOL protection rules are coming into force this year. Here's what UK holidaymakers need to know before booking.</p>
-        <div class="hx-art-footer">
-          <time datetime="2026-03-15">15 March 2026</time>
-          <span class="hx-art-more">Read more →</span>
-        </div>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════
-     SOCIAL SECTION
-     ══════════════════════════════════════════════════════════ -->
-<section class="hx-social" aria-label="Follow Holiday Extras on social media">
-  <div class="hx-social-inner">
-    <h2>Follow us for deals &amp; travel tips</h2>
-    <p>We share the best airport offers, travel hacks, and news every day.</p>
-    <div class="hx-social-links">
-
-      <a href="#" class="hx-soc-link soc-fb" aria-label="Follow Holiday Extras on Facebook">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.27h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
-        Facebook
-      </a>
-
-      <a href="#" class="hx-soc-link soc-ig" aria-label="Follow Holiday Extras on Instagram">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        Instagram
-      </a>
-
-      <a href="#" class="hx-soc-link soc-tt" aria-label="Follow Holiday Extras on TikTok">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
-        TikTok
-      </a>
-
-      <a href="#" class="hx-soc-link soc-bs" aria-label="Follow Holiday Extras on Bluesky">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
-        Bluesky
-      </a>
-
-      <a href="#" class="hx-soc-link soc-yt" aria-label="Follow Holiday Extras on YouTube">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════
-     EMAIL SIGNUP
-     ══════════════════════════════════════════════════════════ -->
-<section class="hx-email-sect" aria-label="Newsletter signup">
-  <div class="hx-email-inner">
-    <h2>Deals and travel tips, straight to your inbox</h2>
-    <p>Join 2 million Holiday Extras subscribers. One email a week, no fluff.</p>
-    <form class="hx-email-row" onsubmit="handleNewsletter(event)" aria-label="Newsletter sign-up form">
-      <label for="nl-email" class="sr-only">Email address</label>
-      <input class="hx-email-field" type="email" id="nl-email" placeholder="Your email address" required autocomplete="email" />
-      <button class="hx-email-btn" type="submit" id="nl-btn">Subscribe</button>
-    </form>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════
-     APP PROMO
-     ══════════════════════════════════════════════════════════ -->
-<section class="hx-app" aria-label="Download the Holiday Extras app">
-  <div class="hx-app-inner">
-    <div>
-      <div class="hx-app-pill" aria-hidden="true">Free app</div>
-      <h2>Book parking, hotels &amp; lounges on the go</h2>
-      <p>The Holiday Extras app makes it easy to find the best deals near your airport — often cheaper than booking on the day. Rated 4.8 stars on iOS and Android.</p>
-      <div class="hx-app-badges">
-        <a href="#" class="hx-store" aria-label="Download Holiday Extras on the App Store">
-          <span class="hx-store-icon" aria-hidden="true">🍎</span>
-          <span class="hx-store-copy"><span>Download on the</span><strong>App Store</strong></span>
+      <div class="app-store-btns">
+        <a href="#" class="app-store-btn">
+          <span class="app-store-icon">🍎</span>
+          <span>App Store<br><strong>iOS</strong></span>
         </a>
-        <a href="#" class="hx-store" aria-label="Get Holiday Extras on Google Play">
-          <span class="hx-store-icon" aria-hidden="true">▶</span>
-          <span class="hx-store-copy"><span>Get it on</span><strong>Google Play</strong></span>
+        <a href="#" class="app-store-btn">
+          <span class="app-store-icon">▶️</span>
+          <span>Google Play<br><strong>Android</strong></span>
         </a>
       </div>
     </div>
-    <div class="hx-app-phone" aria-hidden="true">📱</div>
   </div>
-</section>
 
-<!-- ══════════════════════════════════════════════════════════
-     FOOTER
-     ══════════════════════════════════════════════════════════ -->
-<footer class="hx-footer" role="contentinfo">
-  <div class="hx-footer-inner">
-    <div class="hx-footer-grid">
-
-      <div class="hx-footer-col">
-        <div class="hx-footer-logo">
-          <div class="hx-logo-mark" style="width:30px;height:30px;font-size:13px;" aria-hidden="true">HX</div>
-          <span style="color:white;font-weight:700;font-size:15px;">Holiday <span style="color:var(--hx-primary)">Extras</span></span>
+  <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h5>Über uns</h5>
+          <ul>
+            <li><a href="#">Über holidayextras</a></li>
+            <li><a href="#">Karriere</a></li>
+            <li><a href="#">Presse</a></li>
+            <li><a href="#">Internationale Seiten</a></li>
+            <li><a href="#">holidayextras UK</a></li>
+          </ul>
+          <div class="footer-award">🏆 Deutscher Servicepreis 2025–2026</div>
         </div>
-        <p class="hx-footer-desc">We make your whole trip experience better — from airport parking and hotels to lounges, insurance, and transfers. Making travel smooth since 1983.</p>
-        <p class="hx-footer-desc">Holiday Extras Ltd · Ashford Road · Newingreen · Folkestone · Kent CT21 4JF</p>
+        <div class="footer-col">
+          <h5>Service</h5>
+          <ul>
+            <li><a href="#">AGB</a></li>
+            <li><a href="#">Datenschutzerklärung</a></li>
+            <li><a href="#">Buchung verwalten</a></li>
+            <li><a href="#">Kontakt &amp; Support</a></li>
+            <li><a href="#">Barrierefreiheit</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Reise-Extras</h5>
+          <ul>
+            <li><a href="#">Parken am Flughafen</a></li>
+            <li><a href="#">Flughafen-Hotels</a></li>
+            <li><a href="#">Airport-Lounges</a></li>
+            <li><a href="#">Transferservice</a></li>
+            <li><a href="#">Reiseversicherung</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Beliebt</h5>
+          <ul>
+            <li><a href="#">Parken Frankfurt</a></li>
+            <li><a href="#">Parken München</a></li>
+            <li><a href="#">Parken Düsseldorf</a></li>
+            <li><a href="#">Reisenews</a></li>
+            <li><a href="#">Reise-Newsletter</a></li>
+          </ul>
+        </div>
       </div>
-
-      <div class="hx-footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="#">Airport Parking</a></li>
-          <li><a href="#">Airport Hotels</a></li>
-          <li><a href="#">Airport Lounges</a></li>
-          <li><a href="#">Travel Insurance</a></li>
-          <li><a href="#">Airport Transfers</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Holiday Extras GmbH. Alle Rechte vorbehalten.</p>
+        <div class="footer-legal">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Cookie-Einstellungen</a>
+          <a href="#">AGB</a>
+        </div>
       </div>
-
-      <div class="hx-footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Press</a></li>
-          <li><a href="#">Travel Blog</a></li>
-          <li><a href="#">Contact us</a></li>
-        </ul>
-      </div>
-
-      <div class="hx-footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Cookie Policy</a></li>
-          <li><a href="#">Terms &amp; Conditions</a></li>
-          <li><a href="#">ATOL Protection</a></li>
-          <li><a href="#">Accessibility</a></li>
-        </ul>
-      </div>
-
     </div>
-    <div class="hx-footer-bottom">
-      <span>© 2026 Holiday Extras Ltd. All rights reserved.</span>
-      <span>ATOL Protected · ABTA Member · Part of the HX Group</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- ══════════════════════════════════════════════════════════
-     JAVASCRIPT
-     ══════════════════════════════════════════════════════════ -->
-<script>
-'use strict';
+  <!-- ══════════════════════════════════
+       JAVASCRIPT – TOOL LOGIC
+  ══════════════════════════════════ -->
+  <script>
+    'use strict';
 
-/* ─────────────────────────────────────────────────────────────
-   AIRLINE HEDGE DATA
-   Source: airline investor communications, early 2026
-   Update quarterly from airline investor reports
-   ───────────────────────────────────────────────────────────── */
-const AIRLINES = {
-  easyjet: {
-    name: 'easyJet',
-    hasData: true,
-    note: 'easyJet\'s CEO has publicly warned that fares will rise from end of summer 2026 as hedge protection reduces.',
-    hedge: {
-      'Q1 2026': 84, 'Q2 2026': 84,
-      'Q3 2026': 62, 'Q4 2026': 62,
-      'Q1 2027': 43, 'Q2 2027': 43,
-      'Q3 2027': 20, 'Q4 2027': 15
-    }
-  },
-  ryanair: {
-    name: 'Ryanair',
-    hasData: true,
-    note: 'Ryanair is holding off locking in summer 2027 hedges, waiting for oil prices closer to $70/barrel before committing.',
-    hedge: {
-      'Q1 2026': 84, 'Q2 2026': 82,
-      'Q3 2026': 80, 'Q4 2026': 75,
-      'Q1 2027': 20, 'Q2 2027': 18,
-      'Q3 2027': 12, 'Q4 2027': 10
-    }
-  },
-  ba: {
-    name: 'British Airways',
-    hasData: true,
-    note: 'British Airways (IAG) hedges on a 3-year rolling basis. The steepest drop-off comes in 2027.',
-    hedge: {
-      'Q1 2026': 75, 'Q2 2026': 75,
-      'Q3 2026': 64, 'Q4 2026': 58,
-      'Q1 2027': 39, 'Q2 2027': 35,
-      'Q3 2027': 31, 'Q4 2027': 31
-    }
-  },
-  wizzair: {
-    name: 'Wizz Air',
-    hasData: true,
-    note: 'Wizz Air has strong 2026 coverage but is sharply exposed beyond the start of its FY2028 (April 2027 onwards).',
-    hedge: {
-      'Q1 2026': 83, 'Q2 2026': 75,
-      'Q3 2026': 55, 'Q4 2026': 55,
-      'Q1 2027': 40, 'Q2 2027': 20,
-      'Q3 2027':  7, 'Q4 2027':  7
-    }
-  },
-  jet2: {
-    name: 'Jet2',
-    hasData: false,
-    noDataMsg: 'Jet2 hedges its fuel costs, but doesn\'t publicly disclose its positions. We won\'t guess. What we can say is that Jet2 has a strong operational track record and actively manages fuel risk — but the specific figures aren\'t public, so we can\'t show you how much cover they have, or when it runs out.'
-  },
-  tui: {
-    name: 'TUI Airways',
-    hasData: false,
-    noDataMsg: 'TUI Airways hedges its fuel costs, but doesn\'t publicly disclose its positions. We won\'t estimate what we don\'t know. TUI is part of TUI Group, which actively manages fuel price risk — but the specific figures aren\'t available publicly, so we can\'t track them here.'
-  }
-};
+    /* ─── HARDCODED HEDGE DATA ───────────────────────────────────────
+       Source: Public investor communications, early 2026.
+       Update quarterly from airline investor reports.
+    ─────────────────────────────────────────────────────────────── */
+    const HEDGE_DATA = {
+      // Quarter labels in display order
+      quarters: [
+        "Q1 2026", "Q2 2026", "Q3 2026", "Q4 2026",
+        "Q1 2027", "Q2 2027", "Q3 2027", "Q4 2027"
+      ],
 
-const QUARTERS = [
-  'Q1 2026','Q2 2026','Q3 2026','Q4 2026',
-  'Q1 2027','Q2 2027','Q3 2027','Q4 2027'
-];
+      airlines: {
+        lufthansa: {
+          displayName: "Lufthansa",
+          dataAvailable: true,
+          hedging: {
+            "Q1 2026": { pct: 82,   label: "~82%" },
+            "Q2 2026": { pct: 82,   label: "~82%" },
+            "Q3 2026": { pct: 77,   label: "~77%" },
+            "Q4 2026": { pct: 77,   label: "~77%" },
+            "Q1 2027": { pct: null, label: "Unbekannt" },
+            "Q2 2027": { pct: null, label: "Unbekannt" },
+            "Q3 2027": { pct: null, label: "Unbekannt" },
+            "Q4 2027": { pct: null, label: "Unbekannt" }
+          },
+          note: "Einer der best abgesicherten Carrier in Europa. Neue Absicherungsverträge für 2027 wurden noch nicht abgeschlossen. Goldman Sachs warnte zudem vor möglichen Verlusten durch Produktbasis-Mismatch zwischen Rohöl-Hedges und den tatsächlichen Kerosinkosten."
+        },
 
-const QUARTER_META = [
-  {q:'Q1',yr:'2026'},{q:'Q2',yr:'2026'},{q:'Q3',yr:'2026'},{q:'Q4',yr:'2026'},
-  {q:'Q1',yr:'2027'},{q:'Q2',yr:'2027'},{q:'Q3',yr:'2027'},{q:'Q4',yr:'2027'}
-];
+        eurowings: {
+          displayName: "Eurowings",
+          dataAvailable: false,
+          hedging: null,
+          noDataNote: "Als 100%-Tochter der Lufthansa Group profitiert Eurowings indirekt von der Konzernabsicherung. Eigene Hedging-Positionen werden nicht öffentlich ausgewiesen – belastbare Aussagen über das tatsächliche Absicherungsniveau sind daher nicht möglich."
+        },
 
-// Current quarter — hardcoded to March 2026 = Q1 2026 for this demo
-// In production, derive dynamically from Date()
-const NOW_QUARTER = 'Q1 2026';
+        ryanair: {
+          displayName: "Ryanair",
+          dataAvailable: true,
+          hedging: {
+            "Q1 2026": { pct: 84,   label: "~84%" },
+            "Q2 2026": { pct: 84,   label: "~84%" },
+            "Q3 2026": { pct: 80,   label: "~80%" },
+            "Q4 2026": { pct: 80,   label: "~80%" },
+            "Q1 2027": { pct: null, label: "Ausstehend" },
+            "Q2 2027": { pct: null, label: "Ausstehend" },
+            "Q3 2027": { pct: null, label: "Ausstehend" },
+            "Q4 2027": { pct: null, label: "Ausstehend" }
+          },
+          note: "Ryanair ist 2026 sehr gut abgesichert, wartet aber mit neuen 2027-Verträgen auf günstigere Ölpreise (angestrebt: ~70 USD/Barrel). Keine 2027-Absicherung zum aktuellen Zeitpunkt abgeschlossen."
+        },
 
-/* ─────────────────────────────────────────────────────────────
-   HELPERS
-   ───────────────────────────────────────────────────────────── */
-function monthYearToQuarter(month, year) {
-  month = parseInt(month, 10);
-  year  = parseInt(year, 10);
-  if (isNaN(month) || isNaN(year)) return null;
-  const q = month <= 3 ? 'Q1' : month <= 6 ? 'Q2' : month <= 9 ? 'Q3' : 'Q4';
-  return `${q} ${year}`;
-}
+        condor: {
+          displayName: "Condor",
+          dataAvailable: false,
+          hedging: null,
+          noDataNote: "Condor hat ein Standard-Absicherungsprogramm bestätigt, veröffentlicht jedoch keine genauen Quoten. Bei langanhaltend hohen Kerosinpreisen sind Preissteigerungen möglich, sobald die laufenden Verträge auslaufen."
+        },
 
-function segClass(pct) {
-  if (pct == null) return 'seg-n';
-  if (pct > 70)  return 'seg-g';
-  if (pct >= 40) return 'seg-a';
-  return 'seg-r';
-}
+        tuifly: {
+          displayName: "TUIfly Deutschland",
+          dataAvailable: false,
+          hedging: null,
+          noDataNote: "TUIfly Deutschland ist über die TUI Group indirekt abgesichert. Da Flugkosten Teil des Pauschalreisepreises sind, bleiben Ticketpreise kurzfristig stabil. Eigene Hedging-Quoten werden nicht veröffentlicht."
+        },
 
-function segAriaLabel(q, pct) {
-  return pct != null ? `${q}: ${pct}% hedge coverage` : `${q}: no data`;
-}
-
-function verdictFor(airlineKey, quarter) {
-  const al = AIRLINES[airlineKey];
-  if (!al || !al.hasData) return null;
-  const pct = al.hedge[quarter];
-  if (pct == null) return null;
-
-  if (pct > 70) {
-    return {
-      level: 'v-g',
-      icon: '✅',
-      headline: `Good news — ${al.name} is well protected for ${quarter}`,
-      text: `Based on publicly disclosed data, ${al.name} has strong fuel coverage for this period. Fares for ${quarter} are likely to reflect locked-in fuel costs rather than today's market prices — so you have some room to compare options before committing.`,
-      badge: '🟢 Safe to compare options'
+        sunexpress: {
+          displayName: "SunExpress",
+          dataAvailable: false,
+          hedging: null,
+          noDataNote: "SunExpress (Joint Venture von Lufthansa und Turkish Airlines) veröffentlicht keine eigenen Hedging-Positionen. Als Carrier mit starkem Türkei-Fokus ist das Unternehmen besonders anfällig für Preisanpassungen bei steigenden Kerosinpreisen."
+        }
+      }
     };
-  }
-  if (pct >= 40) {
-    return {
-      level: 'v-a',
-      icon: '⏰',
-      headline: `Book sooner rather than later for ${quarter}`,
-      text: `${al.name}'s fuel cover for ${quarter} is partial. As more of their fuel gets bought at today's higher prices, that can start to feed through into fares — so booking earlier gives you a better chance of securing the lower end of the price range.`,
-      badge: '🟡 Consider booking soon'
-    };
-  }
-  return {
-    level: 'v-r',
-    icon: '⚠️',
-    headline: `Prices for ${quarter} may already be rising`,
-    text: `${al.name}'s fuel protection for ${quarter} is limited. A large share of their fuel for this period is being bought at current market prices, so there's a real chance fares are already higher than earlier this year — and could rise further before your travel date.`,
-    badge: '🔴 Book now for best prices'
-  };
-}
 
-/* ─────────────────────────────────────────────────────────────
-   RENDER
-   ───────────────────────────────────────────────────────────── */
-function renderTimeline(airlineKey, selectedQ) {
-  const al  = AIRLINES[airlineKey];
-  const bar = document.getElementById('tl-bar');
-  const lbl = document.getElementById('tl-labels');
-  bar.innerHTML = lbl.innerHTML = '';
+    /* ─── CONSTANTS ─────────────────────────────────────────────── */
+    const CURRENT_QUARTER = "Q2 2026"; // April 1, 2026
+    const CURRENT_Q_INDEX = 1;          // index in HEDGE_DATA.quarters
 
-  QUARTERS.forEach((q, i) => {
-    const pct   = al.hedge[q];
-    const cls   = segClass(pct);
-    const isNow = q === NOW_QUARTER;
-    const isSel = q === selectedQ;
+    /* ─── HELPERS ───────────────────────────────────────────────── */
+    function getQuarterKey(month, year) {
+      // month: 1-12
+      const q = Math.ceil(month / 3);
+      return "Q" + q + " " + year;
+    }
 
-    const seg = document.createElement('div');
-    seg.className = `hx-seg ${cls}${isNow ? ' is-now' : ''}${isSel ? ' is-sel' : ''}`;
-    seg.setAttribute('role', 'listitem');
-    seg.setAttribute('aria-label', segAriaLabel(q, pct));
+    function getSegmentClass(pct) {
+      if (pct === null || pct === undefined) return "seg-gray";
+      if (pct >= 70) return "seg-green";
+      if (pct >= 40) return "seg-amber";
+      return "seg-red";
+    }
 
-    const pctSpan = document.createElement('span');
-    pctSpan.className = 'hx-seg-pct';
-    pctSpan.textContent = pct != null ? `${pct}%` : '—';
-    seg.appendChild(pctSpan);
+    function getSegmentTitle(q, data, available) {
+      if (!available || !data || data.pct === null) {
+        return q + ": Keine Daten verfügbar";
+      }
+      return q + ": " + data.label + " abgesichert";
+    }
 
-    const tip = document.createElement('div');
-    tip.className = 'hx-seg-tip';
-    tip.textContent = pct != null ? `${q}: ${pct}% covered` : `${q}: not disclosed`;
-    seg.appendChild(tip);
+    /* Compute left-center position (%) of a segment within the bar */
+    function segmentCenter(index, total) {
+      return ((index + 0.5) / total) * 100;
+    }
 
-    bar.appendChild(seg);
+    /* ─── BUILD TIMELINE ────────────────────────────────────────── */
+    function buildTimeline(airlineKey, travelQuarter) {
+      const airline   = HEDGE_DATA.airlines[airlineKey];
+      const quarters  = HEDGE_DATA.quarters;
+      const total     = quarters.length;
 
-    const l = document.createElement('div');
-    l.className = 'hx-tl-lbl';
-    l.innerHTML = `${QUARTER_META[i].q}<span class="yr">${QUARTER_META[i].yr}</span>`;
-    lbl.appendChild(l);
-  });
+      const bar    = document.getElementById("timelineBar");
+      const labels = document.getElementById("timelineLabels");
 
-  document.getElementById('tl-title').textContent = `${al.name} — fuel hedge coverage`;
-  document.getElementById('tl-note').textContent   = al.note;
-}
+      bar.innerHTML    = "";
+      labels.innerHTML = "";
 
-function renderVerdict(airlineKey, quarter) {
-  const vsect = document.getElementById('verdict-section');
-  const v = verdictFor(airlineKey, quarter);
-  if (!v) { vsect.classList.remove('vis'); return; }
+      quarters.forEach(function(q, idx) {
+        const isCurrent = (q === CURRENT_QUARTER);
+        const isTravel  = travelQuarter ? (q === travelQuarter) : false;
+        const isYear2   = idx >= 4; // Q1 2027+
 
-  document.getElementById('verdict-card').className    = `hx-verdict ${v.level}`;
-  document.getElementById('verdict-icon').textContent  = v.icon;
-  document.getElementById('verdict-headline').textContent = v.headline;
-  document.getElementById('verdict-text').textContent  = v.text;
-  document.getElementById('verdict-badge').textContent = v.badge;
-  vsect.classList.add('vis');
-}
+        let data     = null;
+        let segClass = "seg-gray";
+        let dispTxt  = "—";
 
-function syncLeadForm(airlineKey, month, year) {
-  if (airlineKey) document.getElementById('lead-airline').value = airlineKey;
-  if (month)      document.getElementById('lead-month').value   = month;
-  if (year)       document.getElementById('lead-year').value    = year;
-}
+        if (airline.dataAvailable && airline.hedging && airline.hedging[q]) {
+          data     = airline.hedging[q];
+          segClass = getSegmentClass(data.pct);
+          dispTxt  = data.pct ? data.label : data.label;
+        }
 
-/* ─────────────────────────────────────────────────────────────
-   MAIN UPDATE
-   ───────────────────────────────────────────────────────────── */
-function update() {
-  const airlineKey = document.getElementById('sel-airline').value;
-  const month      = document.getElementById('sel-month').value;
-  const year       = document.getElementById('sel-year').value;
+        // Build segment
+        const seg = document.createElement("div");
+        seg.className  = "t-seg " + segClass;
+        if (isCurrent) seg.classList.add("is-current");
+        if (isTravel)  seg.classList.add("is-travel");
+        if (isYear2)   seg.classList.add("year-start");
+        seg.title = getSegmentTitle(q, data, airline.dataAvailable);
+        seg.setAttribute("role", "img");
+        seg.setAttribute("aria-label", seg.title);
 
-  const tlSection = document.getElementById('timeline-section');
-  const ndSection = document.getElementById('no-data-section');
-  const vSection  = document.getElementById('verdict-section');
+        const lbl = document.createElement("span");
+        lbl.className = "seg-label";
+        lbl.textContent = dispTxt;
+        seg.appendChild(lbl);
 
-  tlSection.classList.remove('vis');
-  ndSection.classList.remove('vis');
-  vSection.classList.remove('vis');
+        bar.appendChild(seg);
 
-  if (!airlineKey) return;
+        // Build label
+        const lblDiv = document.createElement("div");
+        lblDiv.className = "t-lbl";
+        const parts = q.split(" ");
+        lblDiv.innerHTML =
+          '<span class="t-lbl-q">' + parts[0] + '</span>' +
+          '<span class="t-lbl-y">' + parts[1] + '</span>';
+        labels.appendChild(lblDiv);
+      });
 
-  const al = AIRLINES[airlineKey];
-  syncLeadForm(airlineKey, month, year);
+      // Position "Jetzt" marker
+      const nowMarker = document.getElementById("markerNow");
+      const nowPct = segmentCenter(CURRENT_Q_INDEX, total);
+      nowMarker.style.left = nowPct + "%";
 
-  if (!al.hasData) {
-    document.getElementById('no-data-title').textContent = `${al.name} doesn't publish hedging data`;
-    document.getElementById('no-data-msg').textContent   = al.noDataMsg;
-    ndSection.classList.add('vis');
-    return;
-  }
+      // Position "Ihre Reise" marker
+      const travelMarker = document.getElementById("markerTravel");
+      if (travelQuarter) {
+        const travelIdx = quarters.indexOf(travelQuarter);
+        if (travelIdx >= 0) {
+          const travelPct = segmentCenter(travelIdx, total);
+          travelMarker.style.left = travelPct + "%";
+          travelMarker.style.display = "flex";
+        } else {
+          travelMarker.style.display = "none";
+        }
+      } else {
+        travelMarker.style.display = "none";
+      }
+    }
 
-  const selectedQ = monthYearToQuarter(month, year);
-  renderTimeline(airlineKey, selectedQ);
-  tlSection.classList.add('vis');
+    /* ─── GENERATE VERDICT ──────────────────────────────────────── */
+    function generateVerdict(airlineKey, travelQuarter) {
+      const airline = HEDGE_DATA.airlines[airlineKey];
+      const verdictArea = document.getElementById("verdictArea");
 
-  if (selectedQ && QUARTERS.includes(selectedQ)) {
-    renderVerdict(airlineKey, selectedQ);
-  }
-}
+      if (!airline.dataAvailable) {
+        verdictArea.innerHTML =
+          '<div class="no-data-panel">' +
+            '<div class="no-data-icon">ℹ️</div>' +
+            '<h3>Keine öffentlichen Daten verfügbar</h3>' +
+            '<p>' + airline.noDataNote + '</p>' +
+            '<p style="margin-top:10px;"><strong>Unser Rat:</strong> Da keine Absicherungsdaten vorliegen, empfehlen wir generell eine frühzeitige Buchung – insbesondere für Reisen ab Sommer 2027.</p>' +
+            '<span class="no-data-cta">Preisalarm unten einrichten →</span>' +
+          '</div>';
+        return;
+      }
 
-/* ─────────────────────────────────────────────────────────────
-   EVENT LISTENERS
-   ───────────────────────────────────────────────────────────── */
-['sel-airline','sel-airport','sel-dest','sel-month','sel-year'].forEach(id => {
-  document.getElementById(id).addEventListener('change', update);
-});
+      if (!travelQuarter) {
+        verdictArea.innerHTML = "";
+        return;
+      }
 
-/* ─────────────────────────────────────────────────────────────
-   LEAD FORM SUBMIT
-   ───────────────────────────────────────────────────────────── */
-document.getElementById('lead-submit').addEventListener('click', function () {
-  const emailEl = document.getElementById('lead-email');
-  const nameEl  = document.getElementById('lead-name');
-  const errEl   = document.getElementById('email-error');
-  const email   = emailEl.value.trim();
+      const data = airline.hedging[travelQuarter];
+      let type, icon, badge, headline, body, action;
 
-  // Basic validation
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!emailOk) {
-    emailEl.classList.add('invalid');
-    errEl.style.display = 'block';
-    emailEl.focus();
-    return;
-  }
-  emailEl.classList.remove('invalid');
-  errEl.style.display = 'none';
+      if (!data || data.pct === null) {
+        // No data for this specific quarter (pending 2027 contracts)
+        type     = "v-amber";
+        icon     = "⚠️";
+        badge    = "Vorsicht beim Warten";
+        headline = airline.displayName + ": Keine Absicherungsdaten für " + travelQuarter;
+        body     = "Für " + travelQuarter + " liegen noch keine Absicherungsverträge vor. Das bedeutet nicht zwangsläufig höhere Preise – aber die Unsicherheit ist real. Bisher bekannte Daten zeigen, dass " + airline.displayName + " mit dem Abschluss neuer Verträge wartet.";
+        action   = "💡 Empfehlung: Frühzeitig buchen bietet mehr Preissicherheit. Je früher, desto geringer das Risiko.";
+      } else if (data.pct >= 70) {
+        type     = "v-green";
+        icon     = "✅";
+        badge    = "Jetzt buchen";
+        headline = airline.displayName + " ist für " + travelQuarter + " stark abgesichert";
+        body     = "Etwa " + data.label + " des Treibstoffbedarfs für " + travelQuarter + " sind zu günstigen Vorauspreisen gesichert. Die Absicherung schützt Sie aktuell vor unmittelbaren Preiserhöhungen durch steigende Kerosinkosten – das Buchungsfenster ist günstig.";
+        action   = "💡 Empfehlung: Jetzt buchen sichert Ihnen stabile Preise. Warten bis ins Absicherungsloch erhöht das Risiko.";
+      } else if (data.pct >= 40) {
+        type     = "v-amber";
+        icon     = "🟡";
+        badge    = "Bald buchen";
+        headline = airline.displayName + ": Teilweise Absicherung für " + travelQuarter;
+        body     = "Nur etwa " + data.label + " des Treibstoffbedarfs für " + travelQuarter + " sind abgesichert. Das erhöht das Risiko von Preisanpassungen – besonders wenn die Kerosinpreise weiter auf hohem Niveau bleiben.";
+        action   = "💡 Empfehlung: Möglichst bald buchen, um sich die aktuellen Konditionen zu sichern.";
+      } else {
+        type     = "v-red";
+        icon     = "🔴";
+        badge    = "Risikobereich";
+        headline = airline.displayName + ": Geringe Absicherung für " + travelQuarter;
+        body     = "Für " + travelQuarter + " besteht kaum Treibstoffabsicherung. Preiserhöhungen durch höhere Kerosinkosten sind in diesem Zeitraum deutlich wahrscheinlicher – möglicherweise bereits in aktuellen Preisen eingepreist.";
+        action   = "💡 Empfehlung: Sofortige Buchung empfohlen. Je länger Sie warten, desto höher das Preisrisiko.";
+      }
 
-  // Simulate form submission (real endpoint wired by HX dev team)
-  const payload = {
-    name:      nameEl.value.trim() || 'anonymous',
-    email:     email,
-    airline:   document.getElementById('lead-airline').value,
-    month:     document.getElementById('lead-month').value,
-    year:      document.getElementById('lead-year').value,
-    timestamp: new Date().toISOString(),
-    source:    'hx-fuel-hedge-tracker-v1'
-  };
-  console.log('[HX Fuel Hedge Tracker] Lead capture:', payload);
+      const noteHtml = airline.note
+        ? '<div class="verdict-footnote"><strong>Hintergrund:</strong> ' + airline.note + '</div>'
+        : '';
 
-  // Show success state
-  document.getElementById('form-inner').classList.add('hid');
-  const successEl = document.getElementById('form-success');
-  successEl.classList.add('vis');
+      verdictArea.innerHTML =
+        '<div class="verdict-box ' + type + '">' +
+          '<div class="verdict-top">' +
+            '<div class="verdict-icon">' + icon + '</div>' +
+            '<div class="verdict-content">' +
+              '<span class="verdict-badge">' + badge + '</span>' +
+              '<div class="verdict-headline">' + headline + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="verdict-body">' + body + '</div>' +
+          '<div class="verdict-action">' + action + '</div>' +
+          noteHtml +
+        '</div>';
+    }
 
-  const name = nameEl.value.trim();
-  document.getElementById('success-msg').textContent =
-    name ? `You're on the list, ${name}.` : 'You\'re on the list.';
-});
+    /* ─── MAIN CHECK FUNCTION ───────────────────────────────────── */
+    function runHedgeCheck() {
+      const airlineKey  = document.getElementById("sel-airline").value;
+      const monthVal    = document.getElementById("sel-month").value;
+      const yearVal     = document.getElementById("sel-year").value;
 
-// Clear validation state on input
-document.getElementById('lead-email').addEventListener('input', function () {
-  this.classList.remove('invalid');
-  document.getElementById('email-error').style.display = 'none';
-});
+      // Validation
+      if (!airlineKey) {
+        alert("Bitte wählen Sie eine Airline aus.");
+        document.getElementById("sel-airline").focus();
+        return;
+      }
 
-/* ─────────────────────────────────────────────────────────────
-   NEWSLETTER
-   ───────────────────────────────────────────────────────────── */
-function handleNewsletter(e) {
-  e.preventDefault();
-  const input = document.getElementById('nl-email');
-  const btn   = document.getElementById('nl-btn');
-  console.log('[HX Newsletter] Signup:', input.value.trim());
-  btn.textContent  = '✓ You\'re in!';
-  btn.style.background = '#22C55E';
-  btn.disabled = true;
-  input.value  = '';
-}
+      const results   = document.getElementById("toolResults");
+      const nameSpan  = document.getElementById("timelineAirlineName");
+      const airline   = HEDGE_DATA.airlines[airlineKey];
 
-/* ─────────────────────────────────────────────────────────────
-   SHARE
-   ───────────────────────────────────────────────────────────── */
-function doShare() {
-  if (navigator.share) {
-    navigator.share({
-      title: 'Airline Fuel Hedge Tracker — Holiday Extras',
-      text:  'Find out when your airline\'s fuel protection runs out — and whether to book now or later.',
-      url:   window.location.href
-    }).catch(() => {});
-  } else {
-    copyLink(document.querySelector('[onclick="doShare()"]'));
-  }
-}
+      nameSpan.textContent = airline.displayName;
 
-function copyLink(btn) {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    const orig = btn.innerHTML;
-    btn.innerHTML = '<span aria-hidden="true">✓</span> Copied!';
-    setTimeout(() => { btn.innerHTML = orig; }, 2200);
-  }).catch(() => {
-    // Fallback for older browsers
-    const el = document.createElement('input');
-    el.value = window.location.href;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  });
-}
-</script>
+      let travelQuarter = null;
+      if (monthVal && yearVal) {
+        travelQuarter = getQuarterKey(parseInt(monthVal, 10), parseInt(yearVal, 10));
+        // Validate it's within our data range
+        if (!HEDGE_DATA.quarters.includes(travelQuarter)) {
+          travelQuarter = null;
+        }
+      }
+
+      // Build timeline
+      buildTimeline(airlineKey, travelQuarter);
+
+      // Generate verdict
+      generateVerdict(airlineKey, travelQuarter);
+
+      // Sync airline selection to lead form
+      const lfAirline = document.getElementById("lf-airline");
+      if (lfAirline && airlineKey) {
+        lfAirline.value = airlineKey;
+      }
+
+      // Show results
+      results.classList.add("visible");
+
+      // Smooth scroll to results
+      setTimeout(function() {
+        results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 100);
+    }
+
+    /* ─── LEAD FORM ─────────────────────────────────────────────── */
+    function handleLeadSubmit(e) {
+      e.preventDefault();
+      const name    = document.getElementById("lf-name").value.trim();
+      const email   = document.getElementById("lf-email").value.trim();
+      const airline = document.getElementById("lf-airline").value;
+      const consent = document.getElementById("lf-consent").checked;
+      const travel  = document.getElementById("lf-travel").value.trim();
+
+      if (!name || !email) {
+        alert("Bitte geben Sie Ihren Namen und Ihre E-Mail-Adresse an.");
+        return;
+      }
+      if (!consent) {
+        alert("Bitte stimmen Sie der Datenschutzerklärung zu, um den Preisalarm zu aktivieren.");
+        return;
+      }
+
+      // Simulate submission (replace with real endpoint post-demo)
+      const payload = { name, email, airline, travel, consent, timestamp: new Date().toISOString() };
+      console.log("[HX Hedge Tracker] Lead captured:", JSON.stringify(payload, null, 2));
+
+      // Show success state
+      document.getElementById("leadFormWrap").style.display = "none";
+      const success = document.getElementById("leadSuccess");
+      success.classList.add("active");
+      success.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    /* ─── NEWSLETTER SIGNUP ─────────────────────────────────────── */
+    function handleNewsletterSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById("newsletter-email").value.trim();
+      if (!email) return;
+      console.log("[HX Newsletter] Signup:", email);
+      e.target.innerHTML = '<p style="color:rgba(255,255,255,0.9);font-size:14px;font-weight:700;">✅ Vielen Dank! Sie erhalten in Kürze eine Bestätigung.</p>';
+    }
+
+    /* ─── SHARE FUNCTIONS ───────────────────────────────────────── */
+    function shareToFacebook() {
+      const url = encodeURIComponent(window.location.href);
+      const shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+      window.open(shareUrl, "_blank", "noopener,width=580,height=400");
+    }
+
+    function shareToWhatsApp() {
+      const text = encodeURIComponent(
+        "Wussten Sie, dass die Kerosin-Absicherung der Airlines 2026/2027 ausläuft? " +
+        "Das könnte Flugpreise erhöhen. Prüfen Sie Ihre Airline hier: " +
+        window.location.href
+      );
+      window.open("https://wa.me/?text=" + text, "_blank", "noopener");
+    }
+
+    function copyLink() {
+      const btn = document.getElementById("copyBtn");
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        btn.classList.add("copied");
+        btn.innerHTML =
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>' +
+          'Kopiert!';
+        setTimeout(function() {
+          btn.classList.remove("copied");
+          btn.innerHTML =
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>' +
+            'Link kopieren';
+        }, 2500);
+      }).catch(function() {
+        // Fallback for older browsers
+        const dummy = document.createElement("input");
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        btn.textContent = "Kopiert! ✓";
+        setTimeout(function() { btn.textContent = "Link kopieren"; }, 2500);
+      });
+    }
+
+    /* ─── KEYBOARD SUPPORT ──────────────────────────────────────── */
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" && document.activeElement) {
+        const tag = document.activeElement.tagName.toLowerCase();
+        if (tag === "select" || tag === "input") {
+          // Allow normal behavior in form fields
+        }
+      }
+    });
+
+    /* ─── INIT ──────────────────────────────────────────────────── */
+    // Pre-populate lead form if URL has params (for share link support)
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("airline")) {
+        const sel = document.getElementById("sel-airline");
+        if (sel) sel.value = params.get("airline");
+      }
+      if (params.get("month")) {
+        const sel = document.getElementById("sel-month");
+        if (sel) sel.value = params.get("month");
+      }
+      if (params.get("year")) {
+        const sel = document.getElementById("sel-year");
+        if (sel) sel.value = params.get("year");
+      }
+      if (params.get("airline")) {
+        // Auto-run if params present
+        setTimeout(runHedgeCheck, 200);
+      }
+    })();
+  </script>
+
 </body>
 </html>
